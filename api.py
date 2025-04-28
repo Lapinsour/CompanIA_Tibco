@@ -55,21 +55,20 @@ def run_script():
     collaborateur_nom = request.form.get('collaborateur_nom', '')
     collaborateur_fonction = request.form.get('collaborateur_fonction','')
     destinataire = request.form.get('destinataire', '')
+    autre = request.form.get('autre','')
 
     # Récupération des cases cochées sous forme de liste
     choix = request.form.getlist('choix')
     choix_str = ",".join(choix)  
 
-    # Récupération de l'email utilisateur via SSO
-    email_utilisateur = request.headers.get('X-User-Email', 'pgarrigues@tibco.fr') 
+     
 
     # Exécution du script Python avec tous les paramètres
     thread = threading.Thread(target=lancer_script_en_arriere_plan, args=(
-        entreprise_nom, secteur, contexte, collaborateur_nom, destinataire, choix_str, email_utilisateur, collaborateur_fonction
+        entreprise_nom, secteur, contexte, collaborateur_nom, destinataire, choix_str, email_utilisateur, collaborateur_fonction, autre
     ))
     thread.start()
-    #print(f"Script exécuté avec : {entreprise_nom}, {secteur}, {contexte}, {collaborateur_nom}, {destinataire}, {choix_str}, {email_utilisateur}, {collaborateur_fonction}")
-    # Redirection vers la page résultat avec les infos
+    
     return redirect(url_for('suivi_feedback'))
 
 @app.route("/suivi", methods=['GET', 'POST'])

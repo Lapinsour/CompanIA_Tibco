@@ -1,4 +1,4 @@
-def prompt_generator_func(entreprise_nom, collab_nom, centre_interet_inputs, contexte, secteur, actu_client, news_secteur, services_tibco, collab_fonction) :
+def prompt_generator_func(entreprise_nom, collab_nom, centre_interet_inputs, contexte, secteur, actu_client, news_secteur, services_tibco, collab_fonction, autre) :
     prompt = f"""
     🎯 Objectif de la tâche
     Génère un brief commercial clair et structuré pour préparer un rendez-vous entre un commercial TIBCO et un interlocuteur de {entreprise_nom}. Le brief doit inclure une analyse de l’actualité de l’entreprise cliente, une synthèse de ses enjeux, une présentation des offres pertinentes de TIBCO et un plan d’action pour la suite des échanges.
@@ -51,7 +51,7 @@ def prompt_generator_func(entreprise_nom, collab_nom, centre_interet_inputs, con
     🎯 Problématiques, objectifs et attentes du client (≥ 1000 signes)
     Déduis-les à partir de l’appel d’offres, des enjeux sectoriels et de leurs priorités.Identifie les enjeux concrets (cybersécurité, complexité du sourcing, modernisation, etc.)
 
-    🛡️ Réponses TIBCO aux problématiques (≥ 1000 signes)
+    🛡️ Réponses TIBCO aux problématiques (≥ 2000 signes)
     Mets en parallèle les sous-offres TIBCO et les besoins/problèmes identifiés.
     Présente chaque offre TIBCO pertinente grâce au schéma Caractéristique - Avantage - Bénéfice. 
     Caractéristique : Ce qu’est le produit ou service (aspect technique, fonction).
@@ -62,6 +62,7 @@ def prompt_generator_func(entreprise_nom, collab_nom, centre_interet_inputs, con
     🕵️ Questions à poser durant le rendez-vous (500 signes)
     En prenant bien en compte la fonction de l'interlocuteur, {collab_fonction}, propose une liste de questions ouvertes et pertinentes. 
     
+    Si {autre} n'est pas vide, réponds enfin à la question {autre}.
 
     🗓️ Prochaines étapes / plan d’action (≥ 1000 signes)
     Synthèse, proposition de 2e RDV, envoi doc, aide au CCTP.

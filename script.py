@@ -66,6 +66,7 @@ collab_nom = sys.argv[4]
 destinataire = sys.argv[5]
 centre_interet = sys.argv[6] 
 collab_fonction = sys.argv[7]
+autre = sys.argv[8]
 
 
 
@@ -606,7 +607,7 @@ def Query_GPT(entreprise_nom, model_name, OPENAI_API_KEY,PINECONE_INDEX_NAME):
     #    print(pappers_info)
 
         
-    prompt = prompt_generator_func(entreprise_nom, collab_nom, centre_interet_inputs, contexte, secteur, actu_client, news_secteur, services_tibco, collab_fonction)
+    prompt = prompt_generator_func(entreprise_nom, collab_nom, centre_interet_inputs, contexte, secteur, actu_client, news_secteur, services_tibco, collab_fonction, autre)
     #-------------------------------------------------------------------------------------------------------------------------------------------------------------#
         
     

@@ -144,7 +144,7 @@
           {% endfor %}
       </datalist>
 
-      <label>Secteur de l'entreprise</label>
+      <label>Secteur d'activité'</label>
       <input type="text" name="secteur_entreprise"
         placeholder="Exemples : automobile, financier...">
 
@@ -153,21 +153,22 @@
 
       <div style="display: flex; gap: 30px; align-items: flex-start;">
         <div style="display: flex; flex-direction: column;">
-          <label>Nom du contact client</label>
+          <label>Prénom et nom du contact</label>
           <input type="text" name="collaborateur_nom" placeholder="Michel Martin"> 
         </div>
       
         <div style="display: flex; flex-direction: column;">
-          <label>Fonction du contact client</label>
+          <label>Fonction du contact</label>
           <input type="text" name="collaborateur_fonction" placeholder="DSI">  
         </div>
       </div>    
 
-      <p><strong>Centres d'intérêt du client</strong></p>
-      <p><i>Cochez les services proposés par Tibco susceptibles d'intéresser l'entreprise démarchée</i></p>
+      <p><strong>Centres d'intérêt</strong></p>
+      <p><i>Cochez les services proposés par Tibco susceptibles d'intéresser l'entreprise</i></p>
       <div class="checkbox-group">
         <label><input type="checkbox" name="choix" value="Cyberdef"> Cyberdéfense</label>
         <label><input type="checkbox" name="choix" value="e-Commerce"> e-Commerce</label>
+        <label><input type="checkbox" name="choix" value="Data_IA"> Data & IA</label>
         <label><input type="checkbox" name="choix" value="IMAC"> IMAC</label>
         <label><input type="checkbox" name="choix" value="Ingénierie_Projet"> Ingénierie Projet</label>
         <label><input type="checkbox" name="choix" value="Maintenance"> Maintenance</label>
@@ -175,7 +176,11 @@
         <label><input type="checkbox" name="choix" value="Seconde_vie_du_matériel"> Seconde vie du matériel</label>
         <label><input type="checkbox" name="choix" value="Support_Utilisateurs"> Support Utilisateurs</label>
         <label><input type="checkbox" name="choix" value="Systeme"> Système</label>
+        
       </div>
+
+      <label>Autre</label>
+      <textarea name="autre" placeholder="Une question spécifique ? Vous pouvez la poser directement à CompanIA."></textarea>
 
       <label>Destinataire(s) du rapport CompanIA</label>
       <input type="text" name="destinataire"

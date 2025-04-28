@@ -27,21 +27,24 @@ with app.app_context():
     initialize_nltk()
 
 @app.route('/')
-def log():
-    logger.info("App lancée")
-    logger.error("Erreur grave détectée")
 def index():
     try:
         clients = liste_client()  # Appel de la fonction pour récupérer la liste des clients
+        logger.info("Page principale appelée avec succès")
         return render_template('formulaire.html', clients=clients) 
     except:
-        print("Erreur de connexion")
+        logger.error(f"Erreur lors de la récupération des clients : {e}")
         return render_template('formulaire.html', clients=[0])
 
 def lancer_script_en_arriere_plan(*args):
-    subprocess.run([
-        "C:\Program Files\Python\Python313\python.exe", "script.py", *args
-    ])    
+    try:
+        subprocess.run([
+            "C:\Program Files\Python\Python313\python.exe", "script.py", *args
+        ])    
+        logger.info("Script lancé en arrière-plan avec succès")
+    except Exception as e:
+        logger.error(f"Erreur lors du lancement du script : {e}")
+
 
 @app.route('/run-script', methods=['POST'])
 def run_script():

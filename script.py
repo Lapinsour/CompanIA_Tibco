@@ -348,7 +348,7 @@ def convertir_date_texte(date_str):
 
 
 
-async def scrape_bing_news(query):
+async def scrape_bing_news(query, secteur):
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
@@ -358,7 +358,7 @@ async def scrape_bing_news(query):
         await page.set_extra_http_headers({"User-Agent": "Mozilla/5.0"})
 
         # Ouvrir Bing News
-        url = f"""https://www.bing.com/news/search?q={query.replace(' ', '+')}+entreprise&qft=interval%3d"9"&form=PTFTNR"""
+        url = f"""https://www.bing.com/news/search?q="{query.replace(' ', '+')}"+secteur+{secteur.replace(' ', '+')}&qft=interval%3d"9"&form=PTFTNR"""
         await page.goto(url)
         await page.wait_for_timeout(3000)  # Attendre le chargement
 
@@ -435,7 +435,7 @@ def google_news_scrap(PINECONE_API_KEY, PINECONE_INDEX_NAME, entreprise_nom):
 
     else :
       
-        news = asyncio.run(scrape_bing_news(f'{entreprise_nom}'))
+        news = asyncio.run(scrape_bing_news(f'{entreprise_nom}', secteur))
         
 
         # Sélectionner les éléments d'articles

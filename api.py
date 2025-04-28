@@ -5,6 +5,8 @@ import nltk
 from nltk.data import find
 from liste_id_rapport_suivi import liste_id_rapport
 import threading
+import ssl
+from logging_config import logger
 
 def safe_download(package):
     try:
@@ -25,13 +27,20 @@ with app.app_context():
     initialize_nltk()
 
 @app.route('/')
+def log():
+    logger.info("App lancée")
+    logger.error("Erreur grave détectée")
 def index():
-    clients = liste_client()  # Appel de la fonction pour récupérer la liste des clients
-    return render_template('formulaire.html', clients=clients) 
+    try:
+        clients = liste_client()  # Appel de la fonction pour récupérer la liste des clients
+        return render_template('formulaire.html', clients=clients) 
+    except:
+        print("Erreur de connexion")
+        return render_template('formulaire.html', clients=[0])
 
 def lancer_script_en_arriere_plan(*args):
     subprocess.run([
-        "python", "script.py", *args
+        "C:\Program Files\Python\Python313\python.exe", "script.py", *args
     ])    
 
 @app.route('/run-script', methods=['POST'])
@@ -67,7 +76,7 @@ def suivi_feedback():
         note_satisfaction = request.form.get('rating_etoiles', '')
 
         subprocess.run([
-            "python", "connect_sql_suivi.py", id_rapport, note_satisfaction
+            "C:\Program Files\Python\Python313\python.exe", "connect_sql_suivi.py", id_rapport, note_satisfaction
         ])
         return render_template("suivi_confirmation.html")
 
@@ -80,5 +89,7 @@ def suivi_feedback():
     
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+    context.load_cert_chain(certfile='C:/Certificats/tibco_fr.crt', keyfile='C:/Certificats/tibco_fr.key')
+    app.run(ssl_context=context, host='0.0.0.0', port=443, debug=True)
     print("Run en cours...")

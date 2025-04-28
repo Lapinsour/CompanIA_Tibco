@@ -3,7 +3,7 @@ from datetime import datetime
 
 def sauvegarde_rapport_func(entreprise_nom, ID_rapport, response_text):
 
-    conn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};''SERVER=REC-DECIS;''DATABASE=COMPANIA;''Trusted_Connection=yes')
+    conn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};''SERVER=HA-DWH;''DATABASE=COMPANIA;''Trusted_Connection=yes')
     cursor = conn.cursor()
 
     # Variables Python à insérer

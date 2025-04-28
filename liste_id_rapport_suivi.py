@@ -1,7 +1,7 @@
 import pyodbc 
 
 def liste_id_rapport():
-    conn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};''SERVER=REC-DECIS;''DATABASE=COMPANIA;''Trusted_Connection=yes')
+    conn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};''SERVER=HA-DWH;''DATABASE=COMPANIA;''Trusted_Connection=yes')
 
     cursor = conn.cursor()
     cursor.execute("""                    

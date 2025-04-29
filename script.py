@@ -359,7 +359,7 @@ async def scrape_bing_news(query, secteur):
         await page.set_extra_http_headers({"User-Agent": "Mozilla/5.0"})
 
         # Ouvrir Bing News
-        url = f"""https://www.bing.com/news/search?q="{query.replace(' ', '+')}"+secteur+{secteur.replace(' ', '+')}&qft=interval%3d"9"&form=PTFTNR"""
+        url = f"""https://www.bing.com/news/search?q="{query.replace(' ', '+')}"+secteur+%20+{secteur.replace(' ', '+')}&qft=interval%3d"9"&form=PTFTNR"""
         await page.goto(url)
         await page.wait_for_timeout(3000)  # Attendre le chargement
 

@@ -4,7 +4,7 @@ def prompt_generator_func(entreprise_nom, collab_nom, centre_interet_inputs, con
     Génère un brief commercial clair et structuré pour préparer un rendez-vous entre un commercial TIBCO et un interlocuteur de {entreprise_nom}. Le brief doit inclure une analyse de l’actualité de l’entreprise cliente, une synthèse de ses enjeux, une présentation des offres pertinentes de TIBCO et un plan d’action pour la suite des échanges.
 
     🏢 Contexte entreprise (TIBCO)
-    TIBCO est une ESN française spécialisée dans 5 domaines :
+    TIBCO, à ne surtout pas confondre avec l'entreprise américaine Tibco Software, est une ESN française spécialisée dans 5 domaines :
 
     Digital Workplace : prolongation de la durée de vie des équipements.
 

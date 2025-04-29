@@ -65,7 +65,7 @@ def run_script():
 
     # Exécution du script Python avec tous les paramètres
     thread = threading.Thread(target=lancer_script_en_arriere_plan, args=(
-        entreprise_nom, secteur, contexte, collaborateur_nom, destinataire, choix_str, email_utilisateur, collaborateur_fonction, autre
+        entreprise_nom, secteur, contexte, collaborateur_nom, destinataire, choix_str, collaborateur_fonction, autre
     ))
     thread.start()
     

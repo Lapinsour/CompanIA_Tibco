@@ -79,6 +79,7 @@ while x_ < 7:
 centre_interet_inputs = centre_interet.split(",") if centre_interet else []
 # Convertir la liste des destinataires en liste python
 destinataires = destinataire.split(";")
+destinataire_str = ", ".join(destinataire_str)
 
 
 # Modèle
@@ -637,7 +638,7 @@ def Query_GPT(entreprise_nom, model_name, OPENAI_API_KEY,PINECONE_INDEX_NAME):
     send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, destinataires, linkedin_url, reponse_relation_sql)
 
     #Sauvegarde du rapport dans HA-DWH
-    sauvegarde_rapport_func(entreprise_nom, ID_rapport, response_text, destinataires, contexte)
+    sauvegarde_rapport_func(entreprise_nom, ID_rapport, response_text, destinataire_str, contexte)
 
       
 

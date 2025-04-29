@@ -1,7 +1,7 @@
 import pyodbc 
 from datetime import datetime
 
-def sauvegarde_rapport_func(entreprise_nom, ID_rapport, response_text):
+def sauvegarde_rapport_func(entreprise_nom, ID_rapport, response_text, destinataire, contexte):
 
     conn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};''SERVER=HA-DWH;''DATABASE=COMPANIA;''Trusted_Connection=yes')
     cursor = conn.cursor()
@@ -13,7 +13,8 @@ def sauvegarde_rapport_func(entreprise_nom, ID_rapport, response_text):
     
     IDENT_RAPPORT = ID_rapport
     TEXTE_RAPPORT = response_text[:3000]
-    MAIL_USER = "pgarrigues@tibco.fr"
+    MAIL_USER = destinataire
+    CONTEXTE = contexte
     
 
     # Requête SQL d'insertion

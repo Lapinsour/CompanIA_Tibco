@@ -60,6 +60,7 @@ def run_script():
     # Récupération des cases cochées sous forme de liste
     choix = request.form.getlist('choix')
     choix_str = ",".join(choix)  
+    logger.info(f"Rapport pour {entreprise_nom} vers {destinataire}")
 
      
 

@@ -55,7 +55,7 @@ def run_script():
     collaborateur_nom = request.form.get('collaborateur_nom', '')
     collaborateur_fonction = request.form.get('collaborateur_fonction','')
     destinataire = request.form.get('destinataire', '')
-    autre = request.form.get('autre','')
+    autre = request.form.get('autre','Pas de question')
 
     # Récupération des cases cochées sous forme de liste
     choix = request.form.getlist('choix')

@@ -62,7 +62,8 @@ def prompt_generator_func(entreprise_nom, collab_nom, centre_interet_inputs, con
     🕵️ Questions à poser durant le rendez-vous (500 signes)
     En prenant bien en compte la fonction de l'interlocuteur, {collab_fonction}, propose une liste de questions ouvertes et pertinentes. 
     
-    Si {autre} n'est pas vide, réponds enfin à la question {autre}.
+    ❓{autre}
+    Réponds à la question : {autre} 
 
     🗓️ Prochaines étapes / plan d’action (≥ 1000 signes)
     Synthèse, proposition de 2e RDV, envoi doc, aide au CCTP.

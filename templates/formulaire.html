@@ -88,7 +88,6 @@
       box-shadow: 0 0 8px #00bfff;
       outline: none;
     }
-
     button {
       width: 100%;
       padding: 12px;
@@ -119,6 +118,58 @@
       flex-direction: column;
       gap: 20px;
     }
+
+    .dropdown {
+      position: relative;
+      width: 100%;
+    }
+
+    .dropdown-button {
+      background-color: #2a2a2a;
+      color: #fff;
+      padding: 10px;
+      border: 1px solid #444;
+      border-radius: 6px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .dropdown-button::after {
+      content: '▼';
+      float: right;
+      font-size: 12px;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #2a2a2a;
+      border: 1px solid #444;
+      border-radius: 6px;
+      max-height: 180px;
+      overflow-y: auto;
+      z-index: 10;
+      margin-top: 4px;
+      width: 100%;
+      padding: 8px;
+    }
+
+    .dropdown-content label {
+      display: flex;
+      align-items: center;
+      padding: 6px;
+      font-size: 14px;
+      color: #ddd;
+      cursor: pointer;
+    }
+
+    .dropdown-content label:hover {
+      background-color: #3a3a3a;
+    }
+
+    .dropdown.open .dropdown-content {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -127,111 +178,108 @@
       <img src="/static/logo.png" alt="Logo" />
       <h2>Bienvenue sur CompanIA</h2>
     </div>
+<form id="mainForm" action="/run-script" method="post">
+    <!-- Inputs en ligne -->
+    <div class="top-row">
+      <div>
+        <label>Nom de l'entreprise</label>
+        <input type="text" name="entreprise_nom" list="entreprise_list" placeholder="Entreprise X"/>
+        <datalist id="entreprise_list">
+          {% for client in clients %}
+            <option value="{{ client }}">
+          {% endfor %}
+        </datalist>
+      </div>
 
-    <form id="mainForm" action="/run-script" method="post">
-      <!-- Inputs en ligne -->
-      <div class="top-row">
-        <div>
-          <label>Nom de l'entreprise</label>
-          <input type="text" name="entreprise_nom" list="entreprise_list" placeholder="Entreprise X"/>
-          <datalist id="entreprise_list">
-            {% for client in clients %}
-              <option value="{{ client }}">
-            {% endfor %}
-          </datalist>
-        </div>
+      <div>
+        <label>Secteur d'activité</label>
+        <input type="text" name="secteur_entreprise" placeholder="Ex: automobile"/>
+      </div>
 
-        <div>
-          <label>Secteur d'activité</label>
-          <input type="text" name="secteur_entreprise" placeholder="Ex: automobile"/>
-        </div>
+      <div>
+        <label>Prénom et nom du contact</label>
+        <input type="text" name="collaborateur_nom" placeholder="Michel Martin"/>
+      </div>
 
-        <div>
-          <label>Prénom et nom du contact</label>
-          <input type="text" name="collaborateur_nom" placeholder="Michel Martin"/>
-        </div>
+      <div>
+        <label>Fonction du contact</label>
+        <input type="text" name="collaborateur_fonction" placeholder="DSI"/>
+      </div>
+    </div>
 
-        <div>
-          <label>Code postal</label>
-          <input type="text" name="code_postal" pattern="\d*" maxlength="5" placeholder="78540"/>
+    <!-- 3 Colonnes -->
+    <div class="columns">
+      <!-- Colonne 1 : dropdown -->
+      <div class="column">
+        <label>Centres d’intérêt</label>
+        <div class="dropdown" id="interetsDropdown">
+          <div class="dropdown-button">Cliquez pour sélectionner</div>
+          <div class="dropdown-content">
+            <label><input type="checkbox" name="choix" value="Cyberdef"> Cyberdéfense</label>
+            <label><input type="checkbox" name="choix" value="e-Commerce"> e-Commerce</label>
+            <label><input type="checkbox" name="choix" value="Data_IA"> Data & IA</label>
+            <label><input type="checkbox" name="choix" value="IMAC"> IMAC</label>
+            <label><input type="checkbox" name="choix" value="Ingénierie_Projet"> Ingénierie Projet</label>
+            <label><input type="checkbox" name="choix" value="Maintenance"> Maintenance</label>
+            <label><input type="checkbox" name="choix" value="Reseau"> Réseau</label>
+            <label><input type="checkbox" name="choix" value="Seconde_vie_du_matériel"> Seconde vie du matériel</label>
+            <label><input type="checkbox" name="choix" value="Support_Utilisateurs"> Support Utilisateurs</label>
+            <label><input type="checkbox" name="choix" value="Systeme"> Système</label>
+          </div>
         </div>
       </div>
 
-      <!-- 3 Colonnes -->
-      <div class="columns">
-
-        <!-- Colonne 1 : Contexte -->
-        <div class="column">
-          <div>
-            <label>Contexte global de l'entretien</label>
-            <textarea name="contexte" placeholder="Ici, ajoutez toute information utile..."></textarea>
-          </div>
+      <!-- Colonne 2 : contexte + autre -->
+      <div class="column">
+        <div>
+          <label>Contexte global de l'entretien</label>
+          <textarea name="contexte" placeholder="Ici, ajoutez toute information utile. Exemple : 
+          Il y a six mois, j'ai rencontré le CEO de l'entreprise ExempleCorp. 
+          Ils viennent de lancer un appel d'offres pour un nouveau prestataire
+          en matière de recyclage des déchets électroniques..."></textarea>
         </div>
-
-        <!-- Colonne 2 : Personnalisation prompt -->
-        <div class="column">
-          <p>Personnaliser votre prompt ?</p>
-          <label>
-            <input type="radio" name="self_prompt_yn" value="Yes" onclick="togglePrompt(this)">
-            Oui
-          </label>
-          <label>
-            <input type="radio" name="self_prompt_yn" value="No" checked onclick="togglePrompt(this)">
-            Non
-          </label>
-
-          <!-- Bloc de cases à cocher pour personnalisation -->
-          <div id="custom-prompt" style="display:none; margin-top:10px;">
-            <p>Choisissez les blocs à inclure dans le prompt :</p>
-
-            <label><input type="checkbox" name="blocks" value="objectif" checked> Objectif de la tâche</label><br>
-            <label><input type="checkbox" name="blocks" value="contexte_tibco" checked> Contexte TIBCO</label><br>
-            <label><input type="checkbox" name="blocks" value="contexte_commercial" checked> Contexte commercial</label><br>
-            <label><input type="checkbox" name="blocks" value="actu_client" checked> Actualité de l’entreprise</label><br>
-            <label><input type="checkbox" name="blocks" value="actu_secteur" checked> Actualité du secteur</label><br>
-            <label><input type="checkbox" name="blocks" value="offres" checked> Offres TIBCO</label><br>
-
-            <label><input type="checkbox" name="blocks" value="structure_intro" checked> Intro structure</label><br>
-            <label><input type="checkbox" name="blocks" value="structure_resume" checked> Résumé entreprise & actualité</label><br>
-            <label><input type="checkbox" name="blocks" value="structure_objectif_rdv" checked> Objectif du RDV</label><br>
-            <label><input type="checkbox" name="blocks" value="structure_problematique" checked> Problématiques & attentes</label><br>
-            <label><input type="checkbox" name="blocks" value="structure_offres" checked> Réponse Tibco (C-A-B)</label><br>
-            <label><input type="checkbox" name="blocks" value="structure_questions" checked> Questions à poser</label><br>
-            <label><input type="checkbox" name="blocks" value="structure_next_steps" checked> Prochaines étapes</label><br>
-          </div>
-        </div>
-
-        <!-- Colonne 3 : destinataires + boutons -->
-        <div class="column">
-          <div>
-            <label>Destinataire(s) du rapport CompanIA</label>
-            <input type="text" name="destinataire" placeholder="ex : tswift@tibco.fr ; mj@gmail.com"/>
-          </div>
-
-          <div>
-            <button type="submit">Envoyer le brief</button>
-            <p class="info-note">Le brief arrivera dans les 3 à 5 minutes</p>
-          </div>
-
-          <div>
-            <form action="{{ url_for('suivi_feedback') }}">
-              <button type="submit">🔄 Accéder au formulaire de suivi</button>
-            </form>
-          </div>
+        <div>
+          <label>Autre</label>
+          <textarea name="autre" placeholder="Une question spécifique à poser à CompanIA ?"></textarea>
         </div>
       </div>
-    </form>
+
+      <!-- Colonne 3 : destinataires + boutons -->
+      <div class="column">
+        <div>
+          <label>Destinataire(s) du rapport CompanIA</label>
+          <input type="text" name="destinataire" placeholder="ex : tswift@tibco.fr ; mj@gmail.com"/>
+        </div>
+
+        <div>
+          <button type="submit">Envoyer le brief</button>
+          <p class="info-note">Le brief arrivera dans les 3 à 5 minutes</p>
+        </div>
+
+        <form action="{{ url_for('suivi_feedback') }}">
+         <button type="submit">🔄 Accéder au formulaire de suivi</button>
+        </form>
+        </div>
+    </div>
   </div>
+        </form>
+
+        
+      
 
   <script>
-    function togglePrompt(radio) {
-      const customPrompt = document.getElementById("custom-prompt");
-      if (radio.value === "Yes") {
-        customPrompt.style.display = "block";
-      } else {
-        customPrompt.style.display = "none";
+    const dropdown = document.getElementById("interetsDropdown");
+    const button = dropdown.querySelector(".dropdown-button");
+
+    button.addEventListener("click", () => {
+      dropdown.classList.toggle("open");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("open");
       }
-    }
+    });
   </script>
 </body>
 </html>

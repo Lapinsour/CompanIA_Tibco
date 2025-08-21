@@ -50,10 +50,10 @@ def index():
         return render_template('formulaire.html', clients=[0])
 
 def lancer_script_en_arriere_plan(*args):
-    #subprocess Lance main_script.py avec les arguments du formulaire dans un thread séparé pour ne pas bloquer le serveur web 
+    #subprocess Lance script.py avec les arguments du formulaire dans un thread séparé pour ne pas bloquer le serveur web 
     #On peut lancer plusieurs requêtes en simultané et/ou remplir le formulaire de satisfaction pendant que la requête tourne
     try:
-        subprocess.run([PYTHON_EXECUTABLE, "main_script.py", *args])
+        subprocess.run([PYTHON_EXECUTABLE, "script.py", *args])
         logger.info("Script lancé en arrière-plan avec succès")
     except Exception as e:
         logger.error(f"Erreur lors du lancement du script")
@@ -61,26 +61,26 @@ def lancer_script_en_arriere_plan(*args):
 
 @app.route('/run-script', methods=['POST'])
 def run_script():
+    # Récupération des valeurs du formulaire
     entreprise_nom = request.form.get('entreprise_nom', '')
     secteur = request.form.get('secteur_entreprise', '')
     contexte = request.form.get('contexte', '')
-    collaborateur_nom = request.form.get('collaborateur_nom', '')    
-    destinataire = request.form.get('destinataire', '')    
-    code_postal = request.form.get('code_postal', '')
-    self_prompt_yn = request.form.get('self_prompt_yn', 'No')
+    collaborateur_nom = request.form.get('collaborateur_nom', '')
+    collaborateur_fonction = request.form.get('collaborateur_fonction','')
+    destinataire = request.form.get('destinataire', '')
+    autre = request.form.get('autre','Pas de question')
 
-    if self_prompt_yn == "Yes":
-        # On récupère les blocs cochés et on les transforme en chaîne
-        selected_blocks = request.form.getlist("blocks")
-        self_prompt = ",".join(selected_blocks)
-    else:
-        self_prompt = ""
+    # Récupération des cases cochées sous forme de liste
+    choix = request.form.getlist('choix')
+    choix_str = ",".join(choix)  
+    logger.info(f"Rapport pour {entreprise_nom} vers {destinataire} avec {choix_str}")
 
-    # Lancement du script en arrière-plan avec tous les arguments
-    thread = threading.Thread(
-        target=lancer_script_en_arriere_plan, 
-        args=(entreprise_nom, secteur, contexte, collaborateur_nom, destinataire, code_postal, self_prompt_yn, self_prompt)
-    )
+     
+
+    # Exécution du script Python avec tous les paramètres
+    thread = threading.Thread(target=lancer_script_en_arriere_plan, args=(
+        entreprise_nom, secteur, contexte, collaborateur_nom, destinataire, choix_str, collaborateur_fonction, autre
+    ))
     thread.start()
     
     return redirect(url_for('suivi_feedback'))

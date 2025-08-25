@@ -1,11 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="fr">
+
 <head>
+   
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Formulaire CompanIA</title>
   <style>
-    body {
+    /* body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #121212;
       margin: 0;
@@ -15,9 +20,9 @@
       align-items: flex-start;
       min-height: 100vh;
       color: #f0f0f0;
-    }
+    } */
 
-    .container {
+    /* .container {
       max-width: 1600px;
       width: 100%;
       padding: 40px;
@@ -28,11 +33,7 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
-    }
-
-    .header {
-      text-align: center;
-    }
+    } */
 
     .header img {
       height: 80px;
@@ -44,34 +45,21 @@
       margin: 0;
     }
 
-    .top-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.33cm;
-      margin-top: 25px;
-    }
-
-    .columns {
-      display: grid;
-      grid-template-columns: 1fr 1fr 0.8fr;
-      gap: 2cm;
-      margin-top: 40px;
-    }
-
     label {
       font-weight: 600;
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       color: #e0e0e0;
+      font-size: 14px;
     }
 
     input[type="text"],
     textarea {
       width: 100%;
       padding: 10px;
-      background-color: #2a2a2a;
-      border: 2px solid #00bfff;
-      border-radius: 6px;
+      background-color: #161616;
+      border: 1px solid #00bfff60;
+      border-radius: 8px;
       color: #fff;
       font-size: 14px;
       transition: box-shadow 0.3s, border-color 0.3s;
@@ -88,29 +76,22 @@
       box-shadow: 0 0 8px #00bfff;
       outline: none;
     }
+
     button {
       width: 100%;
       padding: 12px;
-      background: #00bfff;
+      background: #00bfff30;
       border: none;
       color: white;
       font-size: 16px;
-      font-weight: bold;
-      border-radius: 6px;
+      font-weight: semibold;
+      border-radius: 50px;
       cursor: pointer;
-      margin-top: 15px;
       transition: background 0.3s;
     }
 
     button:hover {
       background: #009acd;
-    }
-
-    .info-note {
-      font-style: italic;
-      font-size: 13px;
-      color: #aaa;
-      margin-bottom: 8px;
     }
 
     .column {
@@ -125,10 +106,10 @@
     }
 
     .dropdown-button {
-      background-color: #2a2a2a;
+      background-color: #161616;
       color: #fff;
       padding: 10px;
-      border: 1px solid #444;
+      border: 1px solid #00bfff60;
       border-radius: 6px;
       text-align: left;
       cursor: pointer;
@@ -138,12 +119,13 @@
       content: '▼';
       float: right;
       font-size: 12px;
+      transform: translateY(10%) translateX(-10px);
     }
 
     .dropdown-content {
       display: none;
       position: absolute;
-      background-color: #2a2a2a;
+      background-color: #161616;
       border: 1px solid #444;
       border-radius: 6px;
       max-height: 180px;
@@ -170,17 +152,36 @@
     .dropdown.open .dropdown-content {
       display: block;
     }
+
+    .gradient-border {
+    background-size: 400% 400%;
+    animation: gradient 3s ease infinite;
+  }
+
+  @keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
   </style>
 </head>
-<body>
-  <div class="container">
-    <div class="header">
-      <img src="/static/logo.png" alt="Logo" />
-      <h2>Bienvenue sur CompanIA</h2>
-    </div>
-<form id="mainForm" action="/run-script" method="post">
-    <!-- Inputs en ligne -->
-    <div class="top-row">
+<body class="bg-gradient-to-br from-slate-900 to-black min-h-screen p-4">
+  <div class="container mx-auto max-w-4xl space-y-8">
+     <header class="text-center flex flex-row items-center gap-8 justify-center">
+      <img src="../static/logo3.png" alt="Logo" class="h-24" />
+      <h2 class="text-lg font-bold text-white">Bienvenue sur<br> <span class=" text-4xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-600 pl-2">Compan IA</span></h2>
+    </header>
+  
+  
+    
+<form id="mainForm" action="/run-script" method="post" class="space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
         <label>Nom de l'entreprise</label>
         <input type="text" name="entreprise_nom" list="entreprise_list" placeholder="Entreprise X"/>
@@ -204,65 +205,72 @@
       <div>
         <label>Fonction du contact</label>
         <input type="text" name="collaborateur_fonction" placeholder="DSI"/>
-      </div>
-    </div>
+      </div>    
+      </div>    
 
     <!-- 3 Colonnes -->
-    <div class="columns">
+    
       <!-- Colonne 1 : dropdown -->
-      <div class="column">
+      <div >
         <label>Centres d’intérêt</label>
         <div class="dropdown" id="interetsDropdown">
           <div class="dropdown-button">Cliquez pour sélectionner</div>
-          <div class="dropdown-content">
-            <label><input type="checkbox" name="choix" value="Cyberdef"> Cyberdéfense</label>
-            <label><input type="checkbox" name="choix" value="e-Commerce"> e-Commerce</label>
-            <label><input type="checkbox" name="choix" value="Data_IA"> Data & IA</label>
-            <label><input type="checkbox" name="choix" value="IMAC"> IMAC</label>
-            <label><input type="checkbox" name="choix" value="Ingénierie_Projet"> Ingénierie Projet</label>
-            <label><input type="checkbox" name="choix" value="Maintenance"> Maintenance</label>
-            <label><input type="checkbox" name="choix" value="Reseau"> Réseau</label>
-            <label><input type="checkbox" name="choix" value="Seconde_vie_du_matériel"> Seconde vie du matériel</label>
-            <label><input type="checkbox" name="choix" value="Support_Utilisateurs"> Support Utilisateurs</label>
-            <label><input type="checkbox" name="choix" value="Systeme"> Système</label>
+          <div class="dropdown-content gap-4">
+            <label class="gap-3"><input type="checkbox" name="choix" value="Cyberdef"> Cyberdéfense</label>
+            <label class="gap-3"><input type="checkbox" name="choix" value="e-Commerce"> e-Commerce</label>
+            <label class="gap-3"><input type="checkbox" name="choix" value="Data_IA"> Data & IA</label>
+            <label class="gap-3"><input type="checkbox" name="choix" value="IMAC"> IMAC</label>
+            <label class="gap-3"><input type="checkbox" name="choix" value="Ingénierie_Projet"> Ingénierie Projet</label>
+            <label class="gap-3"><input type="checkbox" name="choix" value="Maintenance"> Maintenance</label>
+            <label  class="gap-3"><input type="checkbox" name="choix" value="Reseau"> Réseau</label>
+            <label  class="gap-3"><input type="checkbox" name="choix" value="Seconde_vie_du_matériel"> Seconde vie du matériel</label>
+            <label  class="gap-3"><input type="checkbox" name="choix" value="Support_Utilisateurs"> Support Utilisateurs</label>
+            <label  class="gap-3"><input type="checkbox" name="choix" value="Systeme"> Système</label>
           </div>
         </div>
       </div>
 
       <!-- Colonne 2 : contexte + autre -->
-      <div class="column">
+      
         <div>
           <label>Contexte global de l'entretien</label>
           <textarea name="contexte" placeholder="Ici, ajoutez toute information utile. Exemple : 
           Il y a six mois, j'ai rencontré le CEO de l'entreprise ExempleCorp. 
           Ils viennent de lancer un appel d'offres pour un nouveau prestataire
-          en matière de recyclage des déchets électroniques..."></textarea>
+          en matière de recyclage des déchets électroniques..." rows="8"></textarea>
         </div>
+
         <div>
           <label>Autre</label>
-          <textarea name="autre" placeholder="Une question spécifique à poser à CompanIA ?"></textarea>
+          <textarea name="autre" placeholder="Une question spécifique à poser à CompanIA ?" rows="6"></textarea>
         </div>
-      </div>
+      
 
       <!-- Colonne 3 : destinataires + boutons -->
-      <div class="column">
+      
         <div>
           <label>Destinataire(s) du rapport CompanIA</label>
           <input type="text" name="destinataire" placeholder="ex : tswift@tibco.fr ; mj@gmail.com"/>
         </div>
 
-        <div>
-          <button type="submit">Envoyer le brief</button>
-          <p class="info-note">Le brief arrivera dans les 3 à 5 minutes</p>
-        </div>
+        <div class="flex flex-col-reverse md:flex-row items-start gap-8 pt-8">
 
-        <form action="{{ url_for('suivi_feedback') }}">
-         <button type="submit">🔄 Accéder au formulaire de suivi</button>
-        </form>
+          <div class="w-full md:w-auto mx-auto">
+            <form action="{{ url_for('suivi_feedback') }}" class="">
+              <button type="submit" class="!py-3.5 !px-8" ><span class="mr-2"> 👣 </span> Accéder au formulaire de suivi</button>
+            </form>
+          </div>
+        
+          <div class="flex-1 w-full"> 
+            <div class="gradient-border p-0.5 bg-gradient-to-r from-cyan-300 via-pink-500 to-purple-600 rounded-full w-full">
+              <button type="submit" class="!bg-slate-800 text-white hover:!bg-blue-400"><span class="mr-2"> 🪄 </span>Envoyer le brief  </button>
+            </div>
+            <p class="opacity-50 text-white text-xs italic pt-2">Le brief arrivera dans les 3 à 5 minutes</p>
+          </div>    
         </div>
-    </div>
-  </div>
-        </form>
+      </div>
+</form>
+
 
         
       

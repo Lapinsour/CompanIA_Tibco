@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formulaire de retours utilisateurs CompanIA</title>
+        <style>
+            body {
+              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              background-color: #121212;
+              display: flex;
+              justify-content: center;
+              align-items: flex-start;
+              height: 100vh;
+              margin: 0;
+              padding-top: 40px;
+            }
+        
+            .container {
+              background: #1e1e1e;
+              padding: 30px;
+              border-radius: 15px;
+              box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+              width: 420px;
+              color: #f0f0f0;
+            }
+        
+            h2 {
+              text-align: center;
+              color: #00bfff;
+              margin-bottom: 20px;
+            }
+        
+            label {
+              font-weight: 600;
+              display: block;
+              margin-top: 15px;
+              color: #e0e0e0;
+            }
+        
+            input[type="text"],
+            textarea {
+              width: 100%;
+              padding: 10px;
+              margin-top: 8px;
+              background-color: #2a2a2a;
+              border: 1px solid #444;
+              border-radius: 6px;
+              color: #fff;
+              font-size: 14px;
+              transition: border 0.3s, box-shadow 0.3s;
+            }
+        
+            input[type="text"]:focus,
+            textarea:focus {
+              border-color: #00bfff;
+              box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+              outline: none;
+            }
+        
+            textarea {
+              height: 200px;
+              resize: vertical;
+            }
+        
+            .checkbox-group {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 10px;
+              margin-top: 10px;
+            }
+        
+            .checkbox-group label {
+              display: flex;
+              align-items: center;
+              background: #2e2e2e;
+              padding: 6px 10px;
+              border-radius: 6px;
+              cursor: pointer;
+              font-size: 13px;
+              width: 48%;
+              transition: background 0.2s;
+            }
+        
+            .checkbox-group label:hover {
+              background: #3b3b3b;
+            }
+        
+            .checkbox-group input[type="checkbox"] {
+              margin-right: 8px;
+            }
+        
+            button {
+              width: 100%;
+              padding: 12px;
+              background: #00bfff;
+              border: none;
+              color: white;
+              font-size: 16px;
+              font-weight: bold;
+              border-radius: 6px;
+              cursor: pointer;
+              margin-top: 20px;
+              transition: background 0.3s;
+            }
+        
+            button:hover {
+              background: #009acd;
+            }
+        
+            .top-right-logo {
+              position: absolute;
+              top: 20px;
+              right: 200px;
+              height: 150px;
+            }
+        
+            ::placeholder {
+              color: #bbb;
+            }
+        
+            p {
+              margin-top: 15px;
+              font-size: 14px;
+              color: #ccc;
+            }
+          
+
+
+            .star-rating {
+                direction: rtl;
+                display: inline-block;
+                unicode-bidi: bidi-override;
+                font-size: 2em;
+                cursor: pointer;
+            }
+            .star {
+                color: lightgray;
+            }
+            .star.selected,
+            .star:hover,
+            .star:hover ~ .star {
+                color: gold;
+            }    
+
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Votre retour sur CompanIA</h2>
+            <form action="/suivi" method="post">
+                
+                <label>Identifiant du rapport :</label>
+                <input type="text" id="id_rapport" name="id_rapport" list="id_rapport_list" placeholder = "Sélectionnez l'identifiant de votre rapport transmis dans le mail...">
+                <datalist id="id_rapport_list">
+                    {% for id in all_id %}
+                        <option value="{{ id }}">
+                    {% endfor %}
+                </datalist>                
+
+                <label>Note avec étoiles :</label>
+                <div class="star-rating">
+                    <span data-value="5" class="star full">&#9733;</span>
+                    
+                    <span data-value="4" class="star full">&#9733;</span>
+                    
+                    <span data-value="3" class="star full">&#9733;</span>
+                    
+                    <span data-value="2" class="star full">&#9733;</span>
+                    
+                    <span data-value="1" class="star full">&#9733;</span>
+                    
+                </div>
+                <input type="hidden" name="rating_etoiles" id="rating_etoiles">
+
+                <!--<label>Temps économisé grâce à l'outil :</label>            
+                <input type="text" name="temps_gagne" placeholder="Exemple : écrivez '1.5' si vous avez gagné 1h30">
+
+                <label>Commentaire :</label>
+                <textarea name="commentaire" placeholder="Commentaire..."></textarea>-->
+                
+
+                <button type="submit">Exécuter</button>
+                <a href="{{ url_for('index') }}" style="text-decoration: none;">
+                    ⬅️ Retour au formulaire principal
+                </a>
+                
+            </form>
+            
+        </div>
+        <script>
+
+            const stars = document.querySelectorAll('.star-rating .star');
+            const ratingInput = document.getElementById('rating_etoiles');
+
+            stars.forEach(star => {
+                star.addEventListener('click', () => {
+                    const value = parseFloat(star.getAttribute('data-value'));
+                    ratingInput.value = value;
+
+                    // Visuel : reset puis ajout de "selected"
+                    stars.forEach(s => s.classList.remove('selected'));
+                    stars.forEach(s => {
+                        if (parseFloat(s.getAttribute('data-value')) <= value) {
+                            s.classList.add('selected');
+                        }
+                    });
+                });
+            });
+            
+            const inputID = document.getElementById('id_rapport');
+            const datalist = document.getElementById('id_rapport_list');
+
+            inputID.addEventListener('input', function() {
+                const value = inputID.value.toLowerCase();
+                const options = datalist.getElementsByTagName('option');
+                
+                
+                Array.from(options).forEach(option => {
+                    const optionValue = option.value.toLowerCase();
+                    if (optionValue.indexOf(value) === -1) {
+                        option.style.display = 'none'; // Masque l'option si elle ne correspond
+                    } else {
+                        option.style.display = 'block'; // Affiche l'option si elle correspond
+                    }
+                });
+            });
+        </script>
+        
+    </body>
+    </html>
+    

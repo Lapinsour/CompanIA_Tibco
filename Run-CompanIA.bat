@@ -1,0 +1,1 @@
+python C:\applications\companIA\compania_app_py.py

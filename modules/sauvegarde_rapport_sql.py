@@ -1,5 +1,6 @@
 import pyodbc 
 from datetime import datetime
+from modules.logging_config import logger
 
 def sauvegarde_rapport_func(entreprise_nom, ID_rapport, response_text, destinataire_str, contexte):
 
@@ -22,7 +23,7 @@ def sauvegarde_rapport_func(entreprise_nom, ID_rapport, response_text, destinata
         INSERT INTO RAPPORTS_COMPANIA (IDENT_RAPPORT,DATE_RAPPORT,MAIL_USER,TEXTE_RAPPORT,ENTREPRISE_RAPPORT)
         VALUES (?, ?, ?, ?,?)
     """, (IDENT_RAPPORT,DATE_RAPPORT,MAIL_USER,TEXTE_RAPPORT,ENTREPRISE_RAPPORT))
-
+    logger.info("Ok, rapport envoyé vers HA-DWH.")
     # Valider et fermer la connexion
     conn.commit()
     cursor.close()

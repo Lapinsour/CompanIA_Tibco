@@ -1,40 +1,67 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Formulaire CompanIA</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #121212;
+      margin: 0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      height: 100vh;
-      margin: 0;
-      padding-top: 40px;
-    }
-
-    .container {
-      background: #1e1e1e;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-      width: 420px;
+      min-height: 100vh;
       color: #f0f0f0;
     }
 
-    h2 {
+    .container {
+      max-width: 1600px;
+      width: 100%;
+      padding: 40px;
+      box-sizing: border-box;
+      background: #1e1e1e;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .header {
       text-align: center;
+    }
+
+    .header img {
+      height: 80px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
       color: #00bfff;
-      margin-bottom: 20px;
+      margin: 0;
+    }
+
+    .top-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.33cm;
+      margin-top: 25px;
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr 0.8fr;
+      gap: 2cm;
+      margin-top: 40px;
     }
 
     label {
       font-weight: 600;
       display: block;
-      margin-top: 15px;
+      margin-bottom: 6px;
       color: #e0e0e0;
     }
 
@@ -42,54 +69,25 @@
     textarea {
       width: 100%;
       padding: 10px;
-      margin-top: 8px;
       background-color: #2a2a2a;
-      border: 1px solid #444;
+      border: 2px solid #00bfff;
       border-radius: 6px;
       color: #fff;
       font-size: 14px;
-      transition: border 0.3s, box-shadow 0.3s;
-    }
-
-    input[type="text"]:focus,
-    textarea:focus {
-      border-color: #00bfff;
-      box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
-      outline: none;
+      transition: box-shadow 0.3s, border-color 0.3s;
     }
 
     textarea {
-      height: 200px;
       resize: vertical;
+      min-height: 100px;
     }
 
-    .checkbox-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
+    input:focus,
+    textarea:focus {
+    border-color: #00ffff; /* encore plus flashy au focus */
+    box-shadow: 0 0 8px #00bfff;
+    outline: none;
     }
-
-    .checkbox-group label {
-      display: flex;
-      align-items: center;
-      background: #2e2e2e;
-      padding: 6px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 13px;
-      width: 48%;
-      transition: background 0.2s;
-    }
-
-    .checkbox-group label:hover {
-      background: #3b3b3b;
-    }
-
-    .checkbox-group input[type="checkbox"] {
-      margin-right: 8px;
-    }
-
     button {
       width: 100%;
       padding: 12px;
@@ -100,7 +98,7 @@
       font-weight: bold;
       border-radius: 6px;
       cursor: pointer;
-      margin-top: 20px;
+      margin-top: 15px;
       transition: background 0.3s;
     }
 
@@ -108,105 +106,179 @@
       background: #009acd;
     }
 
-    .top-right-logo {
+    .info-note {
+      font-style: italic;
+      font-size: 13px;
+      color: #aaa;
+      margin-bottom: 8px;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .dropdown {
+      position: relative;
+      width: 100%;
+    }
+
+    .dropdown-button {
+      background-color: #2a2a2a;
+      color: #fff;
+      padding: 10px;
+      border: 1px solid #444;
+      border-radius: 6px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .dropdown-button::after {
+      content: '▼';
+      float: right;
+      font-size: 12px;
+    }
+
+    .dropdown-content {
+      display: none;
       position: absolute;
-      top: 20px;
-      right: 200px;
-      height: 150px;
+      background-color: #2a2a2a;
+      border: 1px solid #444;
+      border-radius: 6px;
+      max-height: 180px;
+      overflow-y: auto;
+      z-index: 10;
+      margin-top: 4px;
+      width: 100%;
+      padding: 8px;
     }
 
-    ::placeholder {
-      color: #bbb;
-    }
-
-    p {
-      margin-top: 15px;
+    .dropdown-content label {
+      display: flex;
+      align-items: center;
+      padding: 6px;
       font-size: 14px;
-      color: #ccc;
+      color: #ddd;
+      cursor: pointer;
+    }
+
+    .dropdown-content label:hover {
+      background-color: #3a3a3a;
+    }
+
+    .dropdown.open .dropdown-content {
+      display: block;
     }
   </style>
 </head>
 <body>
-  <div class="header">
-    <img src="/static/logo.png" alt="Logo" class="top-right-logo">
-  </div>
   <div class="container">
-    <h2>CompanIA</h2>
-
-    <form action="/run-script" method="post">
-      <label>Nom de l'entreprise</label>
-      <input type="text" id="entreprise_nom" name="entreprise_nom" list="entreprise_list"
-        placeholder="Sélectionnez une entreprise ou entrez-en une nouvelle">
-
-      <datalist id="entreprise_list">
-        {% for client in clients %}
-        <option value="{{ client }}">
+    <div class="header">
+      <img src="/static/logo.png" alt="Logo" />
+      <h2>Bienvenue sur CompanIA</h2>
+    </div>
+<form id="mainForm" action="/run-script" method="post">
+    <!-- Inputs en ligne -->
+    <div class="top-row">
+      <div>
+        <label>Nom de l'entreprise</label>
+        <input type="text" name="entreprise_nom" list="entreprise_list" placeholder="Entreprise X"/>
+        <datalist id="entreprise_list">
+          {% for client in clients %}
+            <option value="{{ client }}">
           {% endfor %}
-      </datalist>
-
-      <label>Secteur d'activité'</label>
-      <input type="text" name="secteur_entreprise"
-        placeholder="Exemples : automobile, financier...">
-
-      <label>Contexte global de l'entretien</label>
-      <textarea name="contexte" placeholder="Ici, ajoutez toute information que vous pensez pertinente pour préparer votre rendez-vous : Où en êtes-vous dans le processus de fidélisation ? Avez-vous déjà travaillé avec cette entreprise ? Quels défis rencontre-t-elle ? etc. Exemple : C'est mon deuxième rendez-vous avec l'entreprise Vegan'Croq. C'est une PME de 250 employés qui fabrique des croquettes végan pour les animaux de compagnie. Ils cherchent à développer leur présence en ligne et souhaitent embaucher un prestataire pour gérer leur cybersécurité."></textarea>
-
-      <div style="display: flex; gap: 30px; align-items: flex-start;">
-        <div style="display: flex; flex-direction: column;">
-          <label>Prénom et nom du contact</label>
-          <input type="text" name="collaborateur_nom" placeholder="Michel Martin"> 
-        </div>
-      
-        <div style="display: flex; flex-direction: column;">
-          <label>Fonction du contact</label>
-          <input type="text" name="collaborateur_fonction" placeholder="DSI">  
-        </div>
-      </div>    
-
-      <p><strong>Centres d'intérêt</strong></p>
-      <p><i>Cochez les services proposés par Tibco susceptibles d'intéresser l'entreprise</i></p>
-      <div class="checkbox-group">
-        <label><input type="checkbox" name="choix" value="Cyberdef"> Cyberdéfense</label>
-        <label><input type="checkbox" name="choix" value="e-Commerce"> e-Commerce</label>
-        <label><input type="checkbox" name="choix" value="Data_IA"> Data & IA</label>
-        <label><input type="checkbox" name="choix" value="IMAC"> IMAC</label>
-        <label><input type="checkbox" name="choix" value="Ingénierie_Projet"> Ingénierie Projet</label>
-        <label><input type="checkbox" name="choix" value="Maintenance"> Maintenance</label>
-        <label><input type="checkbox" name="choix" value="Reseau"> Réseau</label>
-        <label><input type="checkbox" name="choix" value="Seconde_vie_du_matériel"> Seconde vie du matériel</label>
-        <label><input type="checkbox" name="choix" value="Support_Utilisateurs"> Support Utilisateurs</label>
-        <label><input type="checkbox" name="choix" value="Systeme"> Système</label>
-        
+        </datalist>
       </div>
 
-      <label>Autre</label>
-      <textarea name="autre" placeholder="Une question spécifique ? Vous pouvez la poser directement à CompanIA. Exemple : Quelle actualité de l'entreprise pourrais-je utiliser pour briser la glace lors de l'entretien ?"></textarea>
+      <div>
+        <label>Secteur d'activité</label>
+        <input type="text" name="secteur_entreprise" placeholder="Ex: automobile"/>
+      </div>
 
-      <label>Destinataire(s) du rapport CompanIA</label>
-      <input type="text" name="destinataire"
-        placeholder="Exemple : tswift@tibco.fr ; michael.jackson@gmail.com">
+      <div>
+        <label>Prénom et nom du contact</label>
+        <input type="text" name="collaborateur_nom" placeholder="Michel Martin"/>
+      </div>
 
-      <button type="submit">Envoyer le brief</button>
-      <p><i>Le brief arrivera sur les boîtes mail des destinataires en 3 à 5 minutes</i></p>
-      
-    </form>
-    <form action="{{ url_for('suivi_feedback') }}">
-      <button type="submit">🔄 Accéder au formulaire de suivi</button>
-    </form>
+      <div>
+        <label>Fonction du contact</label>
+        <input type="text" name="collaborateur_fonction" placeholder="DSI"/>
+      </div>
+    </div>
+
+    <!-- 3 Colonnes -->
+    <div class="columns">
+      <!-- Colonne 1 : dropdown -->
+      <div class="column">
+        <label>Centres d’intérêt</label>
+        <div class="dropdown" id="interetsDropdown">
+          <div class="dropdown-button">Cliquez pour sélectionner</div>
+          <div class="dropdown-content">
+            <label><input type="checkbox" name="choix" value="Cyberdef"> Cyberdéfense</label>
+            <label><input type="checkbox" name="choix" value="e-Commerce"> e-Commerce</label>
+            <label><input type="checkbox" name="choix" value="Data_IA"> Data & IA</label>
+            <label><input type="checkbox" name="choix" value="IMAC"> IMAC</label>
+            <label><input type="checkbox" name="choix" value="Ingénierie_Projet"> Ingénierie Projet</label>
+            <label><input type="checkbox" name="choix" value="Maintenance"> Maintenance</label>
+            <label><input type="checkbox" name="choix" value="Reseau"> Réseau</label>
+            <label><input type="checkbox" name="choix" value="Seconde_vie_du_matériel"> Seconde vie du matériel</label>
+            <label><input type="checkbox" name="choix" value="Support_Utilisateurs"> Support Utilisateurs</label>
+            <label><input type="checkbox" name="choix" value="Systeme"> Système</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonne 2 : contexte + autre -->
+      <div class="column">
+        <div>
+          <label>Contexte global de l'entretien</label>
+          <textarea name="contexte" placeholder="Ici, ajoutez toute information utile. Exemple : 
+          Il y a six mois, j'ai rencontré le CEO de l'entreprise ExempleCorp. 
+          Ils viennent de lancer un appel d'offres pour un nouveau prestataire
+          en matière de recyclage des déchets électroniques..."></textarea>
+        </div>
+        <div>
+          <label>Autre</label>
+          <textarea name="autre" placeholder="Une question spécifique à poser à CompanIA ?"></textarea>
+        </div>
+      </div>
+
+      <!-- Colonne 3 : destinataires + boutons -->
+      <div class="column">
+        <div>
+          <label>Destinataire(s) du rapport CompanIA</label>
+          <input type="text" name="destinataire" placeholder="ex : tswift@tibco.fr ; mj@gmail.com"/>
+        </div>
+
+        <div>
+          <button type="submit">Envoyer le brief</button>
+          <p class="info-note">Le brief arrivera dans les 3 à 5 minutes</p>
+        </div>
+
+        <form action="{{ url_for('suivi_feedback') }}">
+         <button type="submit">🔄 Accéder au formulaire de suivi</button>
+        </form>
+        </div>
+    </div>
   </div>
+        </form>
+
+        
+      
 
   <script>
-    const inputEntreprise = document.getElementById('entreprise_nom');
-    const datalist = document.getElementById('entreprise_list');
+    const dropdown = document.getElementById("interetsDropdown");
+    const button = dropdown.querySelector(".dropdown-button");
 
-    inputEntreprise.addEventListener('input', function () {
-      const value = inputEntreprise.value.toLowerCase();
-      const options = datalist.getElementsByTagName('option');
+    button.addEventListener("click", () => {
+      dropdown.classList.toggle("open");
+    });
 
-      Array.from(options).forEach(option => {
-        const optionValue = option.value.toLowerCase();
-        option.style.display = optionValue.includes(value) ? 'block' : 'none';
-      });
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("open");
+      }
     });
   </script>
 </body>

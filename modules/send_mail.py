@@ -3,8 +3,13 @@ import smtplib
 from email.message import EmailMessage
 from gtts import gTTS
 from bs4 import BeautifulSoup
+from openai import OpenAI
+import os 
 
-def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, destinataires, linkedin_url, reponse_relation_sql):
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, destinataires, linkedin_url, reponse_relation_sql, wikipedia_text, resume_inputs, liste_services):
     
 
     # === Helper : conversion Markdown-like vers HTML
@@ -17,6 +22,8 @@ def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, dest
 
     # === Génération du contenu HTML
     response_text_html = markdown_to_html(response_text)
+
+    wikipedia_block = f"<p>{wikipedia_text}</p>" if wikipedia_text else ""
 
     html_content = f"""
     <html>
@@ -31,10 +38,13 @@ def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, dest
     <body>
         <p>Bonjour,</p>
         <p>Voici votre brief préparatoire à votre entretien avec l'entreprise {entreprise_nom}.</p>
+        <p>{resume_inputs}</p>
         <p>Vous voulez vous connecter avec votre interlocuteur.ice ? 
             <a href="{linkedin_url}">Cliquez ici pour accéder à sa page LinkedIn !</a>
-        </p>
+        </p>        
+        <p>LS = {liste_services}</p>
         <p>{reponse_relation_sql}</p>
+        {wikipedia_block}
         {response_text_html}
         <p>Vous trouverez en pièce jointe la retranscription audio de ce rapport.</p>
         <p>Je vous souhaite un excellent entretien !</p>        
@@ -45,13 +55,32 @@ def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, dest
     </html>
     """
 
-    # === Extraction texte pour TTS
+    # === Extraction texte pour TTS & Humanisation
     soup = BeautifulSoup(html_content, "html.parser")
     text_content = soup.get_text(separator="\n")
 
+    client = OpenAI(
+        api_key=OPENAI_API_KEY,
+        )
+    def humanisation(text_content):
+        brief = "Tu es un commercial expérimenté qui explique un brief client à un collègue.\
+              Rends le ton naturel, oral et vivant. Mais reste professionnel. Tu peux ajouter des des pauses, et des tournures dynamiques. Sois clair, structuré mais pas trop formel. Voici le brief :\n"
+        brief+= text_content       
+        response = client.chat.completions.create(        
+            model="gpt-4o",
+            messages=[
+                    {"role": "user", "content": brief}
+                ],
+            temperature = 0.5
+        )
+        return response.choices[0].message.content.strip()
+    
+
+    brief_humain = humanisation(text_content)
+
     # === Génération audio (gTTS)
     audio_file = "votre_rapport.mp3"
-    tts = gTTS(text=text_content, lang='fr')
+    tts = gTTS(text=brief_humain, lang='fr')
     tts.save(audio_file)
 
     # === Configuration SMTP

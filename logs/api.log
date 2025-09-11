@@ -127,3 +127,13 @@
 2025-09-08 16:40:33,537 [INFO] Aucun texte récupéré ou problème d'article Wikipédia.
 2025-09-08 16:42:52,430 [INFO] Ok, rapport envoyé vers HA-DWH.
 2025-09-08 16:42:53,422 [INFO] Script lancé en arrière-plan avec succès
+2025-09-09 10:58:42,670 [ERROR] Erreur lors de la récupération des clients
+2025-09-09 11:10:03,067 [INFO] Aucun texte récupéré ou problème d'article Wikipédia.
+2025-09-09 14:33:28,757 [INFO] Page principale appelée avec succès
+2025-09-11 11:02:23,414 [INFO] Page principale appelée avec succès
+2025-09-11 11:06:48,529 [INFO] article wikipédia trouvé
+2025-09-11 11:08:49,282 [INFO] Ok, rapport envoyé vers HA-DWH.
+2025-09-11 11:10:07,600 [INFO] Page principale appelée avec succès
+2025-09-11 11:12:58,962 [INFO] article wikipédia trouvé
+2025-09-11 11:15:27,647 [INFO] Ok, rapport envoyé vers HA-DWH.
+2025-09-11 11:15:29,189 [INFO] Script lancé en arrière-plan avec succès

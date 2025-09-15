@@ -1,233 +1,165 @@
 <!DOCTYPE html>
+
 <html lang="fr">
+
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Formulaire de génération de script TIBCO">
+  <meta name="keywords" content="TIBCO, script, génération, automatisation">
+  
   <title>Formulaire CompanIA</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      color: #f0f0f0;
-    }
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 
-    .container {
-      max-width: 1600px;
-      width: 100%;
-      padding: 40px;
-      box-sizing: border-box;
-      background: #1e1e1e;
-      border-radius: 15px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .header {
-      text-align: center;
-    }
-
-    .header img {
-      height: 80px;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      color: #00bfff;
-      margin: 0;
-    }
-
-    .top-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.33cm;
-      margin-top: 25px;
-    }
-
-    .columns {
-      display: grid;
-      grid-template-columns: 1fr 1fr 0.8fr;
-      gap: 2cm;
-      margin-top: 40px;
-    }
-
-    label {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 6px;
-      color: #e0e0e0;
-    }
-
-    input[type="text"],
-    textarea {
-      width: 100%;
-      padding: 10px;
-      background-color: #2a2a2a;
-      border: 2px solid #00bfff;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 14px;
-      transition: box-shadow 0.3s, border-color 0.3s;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: #00ffff; 
-      box-shadow: 0 0 8px #00bfff;
-      outline: none;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #00bfff;
-      border: none;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 15px;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background: #009acd;
-    }
-
-    .info-note {
-      font-style: italic;
-      font-size: 13px;
-      color: #aaa;
-      margin-bottom: 8px;
-    }
-
-    .column {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-  </style>
 </head>
-<body>
-  <div class="container">
-    <div class="header">
-      <img src="/static/logo.png" alt="Logo" />
-      <h2>Bienvenue sur CompanIA</h2>
-    </div>
+<body class="bg-gradient-to-br from-slate-900 to-black min-h-screen p-4 text-white">
+  <div class="container mx-auto max-w-4xl space-y-8">
+     <header class="text-center flex flex-row items-center gap-8 justify-center">
+      <img src="{{ url_for('static', filename='logo3.png') }}" alt="Logo" class="h-24" />
+      <h2 class="text-lg font-bold text-white">Bienvenue sur<br> <span class=" text-4xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-600 pl-2">Compan IA</span></h2>
+    </header>
+  
+  
+    
+<form id="mainForm" action="/run-script" method="post" class="space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label>Nom de l'entreprise</label>
+        <input type="text" name="entreprise_nom" list="entreprise_list" placeholder="Entreprise X"/>
+        <datalist id="entreprise_list">
+          {% for client in clients %}
+            <option value="{{ client }}">
+          {% endfor %}
+        </datalist>
+      </div>
 
-    <form id="mainForm" action="/run-script" method="post">
-      <!-- Inputs en ligne -->
-      <div class="top-row">
-        <div>
-          <label>Nom de l'entreprise</label>
-          <input type="text" name="entreprise_nom" list="entreprise_list" placeholder="Entreprise X"/>
-          <datalist id="entreprise_list">
-            {% for client in clients %}
-              <option value="{{ client }}">
-            {% endfor %}
-          </datalist>
-        </div>
+      <div>
+        <label>Secteur d'activité</label>
+        <input type="text" name="secteur_entreprise" placeholder="Ex: automobile"/>
+      </div>
 
-        <div>
-          <label>Secteur d'activité</label>
-          <input type="text" name="secteur_entreprise" placeholder="Ex: automobile"/>
-        </div>
-
-        <div>
-          <label>Prénom et nom du contact</label>
-          <input type="text" name="collaborateur_nom" placeholder="Michel Martin"/>
-        </div>
+      <div>
+        <label>Prénom et nom du contact</label>
+        <input type="text" name="collaborateur_nom" placeholder="Michel Martin"/>
+      </div>
 
         <div>
           <label>Code postal</label>
           <input type="text" name="code_postal" pattern="\d*" maxlength="5" placeholder="78540"/>
-        </div>
-      </div>
+        </div>  
+      </div>    
 
-      <!-- 3 Colonnes -->
-      <div class="columns">
-
-        <!-- Colonne 1 : Contexte -->
-        <div class="column">
-          <div>
-            <label>Contexte global de l'entretien</label>
-            <textarea name="contexte" placeholder="Ici, ajoutez toute information utile..."></textarea>
+    <!-- 3 Colonnes -->
+    
+      <!-- Colonne 1 : dropdown -->
+      <!-- <div >
+        <label>Centres d’intérêt</label>
+        <div class="dropdown" id="interetsDropdown">
+          <div class="dropdown-button">Cliquez pour sélectionner</div>
+          <div class="dropdown-content gap-4">
+            <label class="gap-3"><input type="checkbox" name="choix" value="Cyberdef"> Cyberdéfense</label>
+            <label class="gap-3"><input type="checkbox" name="choix" value="e-Commerce"> e-Commerce</label>
+            <label class="gap-3"><input type="checkbox" name="choix" value="Data_IA"> Data & IA</label>
+            <label class="gap-3"><input type="checkbox" name="choix" value="IMAC"> IMAC</label>
+            <label class="gap-3"><input type="checkbox" name="choix" value="Ingénierie_Projet"> Ingénierie Projet</label>
+            <label class="gap-3"><input type="checkbox" name="choix" value="Maintenance"> Maintenance</label>
+            <label  class="gap-3"><input type="checkbox" name="choix" value="Reseau"> Réseau</label>
+            <label  class="gap-3"><input type="checkbox" name="choix" value="Seconde_vie_du_matériel"> Seconde vie du matériel</label>
+            <label  class="gap-3"><input type="checkbox" name="choix" value="Support_Utilisateurs"> Support Utilisateurs</label>
+            <label  class="gap-3"><input type="checkbox" name="choix" value="Systeme"> Système</label>
           </div>
         </div>
+      </div> -->
 
-        <!-- Colonne 2 : Personnalisation prompt -->
-        <div class="column">
+      <!-- Colonne 2 : contexte + autre -->
+      
+        <div>
+          <label>Contexte global de l'entretien</label>
+          <textarea name="contexte" placeholder="Ici, ajoutez toute information utile. Exemple : 
+          Il y a six mois, j'ai rencontré le CEO de l'entreprise ExempleCorp. 
+          Ils viennent de lancer un appel d'offres pour un nouveau prestataire
+          en matière de recyclage des déchets électroniques..." rows="8"></textarea>
+        </div>
+
+        <!-- <div>
+          <label>Autre</label>
+          <textarea name="autre" placeholder="Une question spécifique à poser à CompanIA ?" rows="6"></textarea>
+        </div>
+       -->
+
+       <div class="column">
           <p>Personnaliser votre prompt ?</p>
-          <label>
-            <input type="radio" name="self_prompt_yn" value="Yes" onclick="togglePrompt(this)">
-            Oui
-          </label>
-          <label>
-            <input type="radio" name="self_prompt_yn" value="No" checked onclick="togglePrompt(this)">
-            Non
-          </label>
+          <div class="flex flex-row gap-4">
+            <label>
+              <input type="radio" name="self_prompt_yn" value="Yes" onclick="togglePrompt(this)">
+              Oui
+            </label>
+            <label>
+              <input type="radio" name="self_prompt_yn" value="No" class="bg-gray-500" checked onclick="togglePrompt(this)">
+              Non
+            </label>
+          </div>
 
           <!-- Bloc de cases à cocher pour personnalisation -->
-          <div id="custom-prompt" style="display:none; margin-top:10px;">
-            <p>Choisissez les blocs à inclure dans le prompt :</p>
-
-            <label><input type="checkbox" name="blocks" value="objectif" checked> Objectif de la tâche</label><br>
-            <label><input type="checkbox" name="blocks" value="contexte_tibco" checked> Contexte TIBCO</label><br>
-            <label><input type="checkbox" name="blocks" value="contexte_commercial" checked> Contexte commercial</label><br>
-            <label><input type="checkbox" name="blocks" value="actu_client" checked> Actualité de l’entreprise</label><br>
-            <label><input type="checkbox" name="blocks" value="actu_secteur" checked> Actualité du secteur</label><br>
-            <label><input type="checkbox" name="blocks" value="offres" checked> Offres TIBCO</label><br>
-
-            <label><input type="checkbox" name="blocks" value="structure_intro" checked> Intro structure</label><br>
-            <label><input type="checkbox" name="blocks" value="structure_resume" checked> Résumé entreprise & actualité</label><br>
-            <label><input type="checkbox" name="blocks" value="structure_objectif_rdv" checked> Objectif du RDV</label><br>
-            <label><input type="checkbox" name="blocks" value="structure_problematique" checked> Problématiques & attentes</label><br>
-            <label><input type="checkbox" name="blocks" value="structure_offres" checked> Réponse Tibco (C-A-B)</label><br>
-            <label><input type="checkbox" name="blocks" value="structure_questions" checked> Questions à poser</label><br>
-            <label><input type="checkbox" name="blocks" value="structure_next_steps" checked> Prochaines étapes</label><br>
+          <div id="custom-prompt" class="grid grid-cols-2 md:grid-cols-3 gap-2" style="display:none">
+            <p class="col-span-2 md:col-span-3">Choisissez les blocs à inclure dans le prompt :</p>
+            
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="actualite" checked> Actualité de l’entreprise</label>            
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="reponse_tibco" checked> Offres de TIBCO</label>         
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="problematique" checked> Objectif du RDV</label>            
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="questions" checked> Questions à poser</label>
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="next_steps" checked> Prochaines étapes</label>
           </div>
         </div>
 
-        <!-- Colonne 3 : destinataires + boutons -->
-        <div class="column">
-          <div>
-            <label>Destinataire(s) du rapport CompanIA</label>
-            <input type="text" name="destinataire" placeholder="ex : tswift@tibco.fr ; mj@gmail.com"/>
-          </div>
+      <!-- Colonne 3 : destinataires + boutons -->
+      
+        <div>
+          <label>Destinataire(s) du rapport CompanIA</label>
+          <input type="text" name="destinataire" placeholder="ex : tswift@tibco.fr ; mj@gmail.com"/>
+        </div>
 
-          <div>
-            <button type="submit">Envoyer le brief</button>
-            <p class="info-note">Le brief arrivera dans les 3 à 5 minutes</p>
-          </div>
+        <div class="flex flex-col-reverse md:flex-row items-start gap-8 pt-8">
 
-          <div>
-            <form action="{{ url_for('suivi_feedback') }}">
-              <button type="submit">🔄 Accéder au formulaire de suivi</button>
+          <div class="w-full md:w-auto mx-auto">
+            <form action="{{ url_for('suivi_feedback') }}" class="">
+              <button type="submit" class="!py-3.5 !px-8" ><span class="mr-2"> 👣 </span> Accéder au formulaire de suivi</button>
             </form>
           </div>
+        
+          <div class="flex-1 w-full"> 
+            <div class="gradient-border p-0.5 bg-gradient-to-r from-cyan-300 via-pink-500 to-purple-600 rounded-full w-full">
+              <button type="submit" class="!bg-slate-800 text-white hover:!bg-blue-400"><span class="mr-2"> 🪄 </span>Envoyer le brief  </button>
+            </div>
+            <p class="opacity-50 text-white text-xs italic pt-2">Le brief arrivera dans les 3 à 5 minutes</p>
+          </div>    
         </div>
       </div>
-    </form>
-  </div>
+</form>
+
+
+        
+      
 
   <script>
-    function togglePrompt(radio) {
+    const dropdown = document.getElementById("interetsDropdown");
+    const button = dropdown.querySelector(".dropdown-button");
+
+    button.addEventListener("click", () => {
+      dropdown.classList.toggle("open");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("open");
+      }
+    });
+
+        function togglePrompt(radio) {
       const customPrompt = document.getElementById("custom-prompt");
       if (radio.value === "Yes") {
-        customPrompt.style.display = "block";
+        customPrompt.style.display = "grid";
       } else {
         customPrompt.style.display = "none";
       }

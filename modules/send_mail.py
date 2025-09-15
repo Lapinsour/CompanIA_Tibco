@@ -5,11 +5,11 @@ from gtts import gTTS
 from bs4 import BeautifulSoup
 from openai import OpenAI
 import os 
-from modules.rag_entreprises_proches import rag_entreprises_proches
+
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, destinataires, linkedin_url, reponse_relation_sql, wikipedia_text, resume_inputs, code_postal):
+def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, destinataires, linkedin_url, reponse_relation_sql, wikipedia_text, resume_inputs, liste_services):
     
 
     # === Helper : conversion Markdown-like vers HTML
@@ -41,7 +41,7 @@ def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, dest
         <p>{resume_inputs}</p>
         <p>Vous voulez vous connecter avec votre interlocuteur.ice ? 
             <a href="{linkedin_url}">Cliquez ici pour accéder à sa page LinkedIn !</a>
-        </p>                
+        </p>      
         <p>{reponse_relation_sql}</p>
         {wikipedia_block}
         {response_text_html}
@@ -101,18 +101,8 @@ def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, dest
             relation_sql.encode('utf-8'),
             maintype='text',
             subtype='csv',
-            filename='Affaires avec cette entreprise.csv'
+            filename='export_affaires.csv'
         )
-
-    phrase, csv_content = rag_entreprises_proches(code_postal) 
-    if csv_content and len(csv_content.strip().splitlines()) > 1:
-    # (splitlines() > 1 → il y a l'en-tête + au moins 1 ligne de données)
-        msg.add_attachment(
-            csv_content.encode("utf-8-sig"),
-            maintype="text",
-            subtype="csv",
-            filename="Affaires avec des entreprises géographiquement proches.csv"
-    )
 
     # === Pièce jointe audio
     with open(audio_file, 'rb') as f:

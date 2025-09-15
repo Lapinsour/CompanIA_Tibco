@@ -50,10 +50,10 @@ def index():
         return render_template('formulaire.html', clients=[0])
 
 def lancer_script_en_arriere_plan(*args):
-    #subprocess Lance script.py avec les arguments du formulaire dans un thread séparé pour ne pas bloquer le serveur web 
+    #subprocess Lance main_script.py avec les arguments du formulaire dans un thread séparé pour ne pas bloquer le serveur web 
     #On peut lancer plusieurs requêtes en simultané et/ou remplir le formulaire de satisfaction pendant que la requête tourne
     try:
-        subprocess.run([PYTHON_EXECUTABLE, "script.py", *args])
+        subprocess.run([PYTHON_EXECUTABLE, "main_script.py", *args])
         logger.info("Script lancé en arrière-plan avec succès")
     except Exception as e:
         logger.error(f"Erreur lors du lancement du script")

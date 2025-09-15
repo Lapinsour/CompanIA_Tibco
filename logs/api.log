@@ -104,26 +104,31 @@
 2025-08-19 14:50:45,733 [INFO] Page principale appelée avec succès
 2025-08-19 14:52:11,679 [INFO] article wikipédia trouvé
 2025-08-19 14:55:12,067 [INFO] Ok, rapport envoyé vers HA-DWH.
-2025-09-08 16:01:03,226 [INFO] Page principale appelée avec succès
-2025-09-08 16:14:47,142 [INFO] Page principale appelée avec succès
-2025-09-08 16:16:31,012 [INFO] Page principale appelée avec succès
-2025-09-08 16:17:33,961 [INFO] Rapport pour 123 SANTE vers pgarrigues@tibco.fr avec 
-2025-09-08 16:19:32,419 [INFO] article wikipédia trouvé
-2025-09-08 16:23:09,156 [INFO] Rapport pour 123 SANTE vers pgarrigues@tibco.fr avec 
-2025-09-08 16:23:14,011 [INFO] Page principale appelée avec succès
-2025-09-08 16:23:47,521 [INFO] article wikipédia trouvé
-2025-09-08 16:23:57,140 [INFO] Rapport pour AIRBUS vers pgarrigues@tibco.fr avec 
-2025-09-08 16:23:58,669 [INFO] Page principale appelée avec succès
-2025-09-08 16:24:45,717 [INFO] article wikipédia trouvé
-2025-09-08 16:26:45,558 [INFO] Ok, rapport envoyé vers HA-DWH.
-2025-09-08 16:27:21,081 [INFO] Ok, rapport envoyé vers HA-DWH.
-2025-09-08 16:30:19,392 [INFO] Page principale appelée avec succès
-2025-09-08 16:30:46,901 [INFO] Page principale appelée avec succès
-2025-09-08 16:32:29,308 [INFO] article wikipédia trouvé
-2025-09-08 16:34:21,239 [INFO] Ok, rapport envoyé vers HA-DWH.
-2025-09-08 16:34:22,222 [INFO] Script lancé en arrière-plan avec succès
-2025-09-08 16:39:19,655 [INFO] Page principale appelée avec succès
-2025-09-08 16:39:25,076 [INFO] Page principale appelée avec succès
-2025-09-08 16:40:33,537 [INFO] Aucun texte récupéré ou problème d'article Wikipédia.
-2025-09-08 16:42:52,430 [INFO] Ok, rapport envoyé vers HA-DWH.
-2025-09-08 16:42:53,422 [INFO] Script lancé en arrière-plan avec succès
+2025-09-15 11:58:02,674 [INFO] Page principale appelée avec succès
+2025-09-15 12:01:07,454 [INFO] article wikipédia trouvé
+2025-09-15 12:02:33,130 [INFO] Page principale appelée avec succès
+2025-09-15 12:02:35,975 [INFO] Page principale appelée avec succès
+2025-09-15 12:03:44,022 [INFO] Page principale appelée avec succès
+2025-09-15 12:03:44,077 [ERROR] Erreur lors de la récupération des clients
+2025-09-15 12:04:32,065 [INFO] Ok, rapport envoyé vers HA-DWH.
+2025-09-15 12:06:05,747 [INFO] Page principale appelée avec succès
+2025-09-15 12:07:36,690 [INFO] article wikipédia trouvé
+2025-09-15 12:08:27,144 [INFO] Page principale appelée avec succès
+2025-09-15 12:08:59,257 [INFO] article wikipédia trouvé
+2025-09-15 12:09:34,332 [INFO] Page principale appelée avec succès
+2025-09-15 12:10:02,757 [INFO] Ok, rapport envoyé vers HA-DWH.
+2025-09-15 12:10:03,936 [INFO] Script lancé en arrière-plan avec succès
+2025-09-15 12:11:28,067 [INFO] Ok, rapport envoyé vers HA-DWH.
+2025-09-15 12:11:51,650 [INFO] article wikipédia trouvé
+2025-09-15 12:16:02,518 [ERROR] Erreur lors de la récupération des clients
+2025-09-15 12:17:00,299 [INFO] article wikipédia trouvé
+2025-09-15 12:18:42,430 [INFO] Ok, rapport envoyé vers HA-DWH.
+2025-09-15 12:18:43,524 [INFO] Script lancé en arrière-plan avec succès
+2025-09-15 12:21:13,415 [ERROR] Erreur lors de la récupération des clients
+2025-09-15 12:28:41,002 [ERROR] Erreur lors de la récupération des clients
+2025-09-15 12:31:42,221 [INFO] article wikipédia trouvé
+2025-09-15 12:33:55,819 [INFO] Ok, rapport envoyé vers HA-DWH.
+2025-09-15 12:34:39,342 [ERROR] Erreur lors de la récupération des clients
+2025-09-15 12:35:39,586 [INFO] article wikipédia trouvé
+2025-09-15 12:39:49,950 [INFO] Ok, rapport envoyé vers HA-DWH.
+2025-09-15 12:39:50,922 [INFO] Script lancé en arrière-plan avec succès

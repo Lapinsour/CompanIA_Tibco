@@ -3,175 +3,16 @@
 <html lang="fr">
 
 <head>
-   
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Formulaire de génération de script TIBCO">
+  <meta name="keywords" content="TIBCO, script, génération, automatisation">
+  
   <title>Formulaire CompanIA</title>
-  <style>
-    /* body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      color: #f0f0f0;
-    } */
-
-    /* .container {
-      max-width: 1600px;
-      width: 100%;
-      padding: 40px;
-      box-sizing: border-box;
-      background: #1e1e1e;
-      border-radius: 15px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    } */
-
-    .header img {
-      height: 80px;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      color: #00bfff;
-      margin: 0;
-    }
-
-    label {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 8px;
-      color: #e0e0e0;
-      font-size: 14px;
-    }
-
-    input[type="text"],
-    textarea {
-      width: 100%;
-      padding: 10px;
-      background-color: #161616;
-      border: 1px solid #00bfff60;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 14px;
-      transition: box-shadow 0.3s, border-color 0.3s;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: #00ffff; 
-      box-shadow: 0 0 8px #00bfff;
-      outline: none;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #00bfff30;
-      border: none;
-      color: white;
-      font-size: 16px;
-      font-weight: semibold;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background: #009acd;
-    }
-
-    .column {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .dropdown {
-      position: relative;
-      width: 100%;
-    }
-
-    .dropdown-button {
-      background-color: #161616;
-      color: #fff;
-      padding: 10px;
-      border: 1px solid #00bfff60;
-      border-radius: 6px;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .dropdown-button::after {
-      content: '▼';
-      float: right;
-      font-size: 12px;
-      transform: translateY(10%) translateX(-10px);
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #161616;
-      border: 1px solid #444;
-      border-radius: 6px;
-      max-height: 180px;
-      overflow-y: auto;
-      z-index: 10;
-      margin-top: 4px;
-      width: 100%;
-      padding: 8px;
-    }
-
-    .dropdown-content label {
-      display: flex;
-      align-items: center;
-      padding: 6px;
-      font-size: 14px;
-      color: #ddd;
-      cursor: pointer;
-    }
-
-    .dropdown-content label:hover {
-      background-color: #3a3a3a;
-    }
-
-    .dropdown.open .dropdown-content {
-      display: block;
-    }
-
-    .gradient-border {
-    background-size: 400% 400%;
-    animation: gradient 3s ease infinite;
-  }
-
-  @keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-  </style>
+  <link rel="stylesheet" href="main.css">
 </head>
-<body class="bg-gradient-to-br from-slate-900 to-black min-h-screen p-4">
+<body class="bg-gradient-to-br from-slate-900 to-black min-h-screen p-4 text-white">
   <div class="container mx-auto max-w-4xl space-y-8">
      <header class="text-center flex flex-row items-center gap-8 justify-center">
       <img src="../static/logo3.png" alt="Logo" class="h-24" />
@@ -202,16 +43,16 @@
         <input type="text" name="collaborateur_nom" placeholder="Michel Martin"/>
       </div>
 
-      <div>
-        <label>Fonction du contact</label>
-        <input type="text" name="collaborateur_fonction" placeholder="DSI"/>
-      </div>    
+        <div>
+          <label>Code postal</label>
+          <input type="text" name="code_postal" pattern="\d*" maxlength="5" placeholder="78540"/>
+        </div>  
       </div>    
 
     <!-- 3 Colonnes -->
     
       <!-- Colonne 1 : dropdown -->
-      <div >
+      <!-- <div >
         <label>Centres d’intérêt</label>
         <div class="dropdown" id="interetsDropdown">
           <div class="dropdown-button">Cliquez pour sélectionner</div>
@@ -228,7 +69,7 @@
             <label  class="gap-3"><input type="checkbox" name="choix" value="Systeme"> Système</label>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Colonne 2 : contexte + autre -->
       
@@ -240,11 +81,44 @@
           en matière de recyclage des déchets électroniques..." rows="8"></textarea>
         </div>
 
-        <div>
+        <!-- <div>
           <label>Autre</label>
           <textarea name="autre" placeholder="Une question spécifique à poser à CompanIA ?" rows="6"></textarea>
         </div>
-      
+       -->
+
+       <div class="column">
+          <p>Personnaliser votre prompt ?</p>
+          <div class="flex flex-row gap-4">
+            <label>
+              <input type="radio" name="self_prompt_yn" value="Yes" onclick="togglePrompt(this)">
+              Oui
+            </label>
+            <label>
+              <input type="radio" name="self_prompt_yn" value="No" class="bg-gray-500" checked onclick="togglePrompt(this)">
+              Non
+            </label>
+          </div>
+
+          <!-- Bloc de cases à cocher pour personnalisation -->
+          <div id="custom-prompt" class="grid grid-cols-2 md:grid-cols-3 gap-2" style="display:none">
+            <p class="col-span-2 md:col-span-3">Choisissez les blocs à inclure dans le prompt :</p>
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="objectif" checked> Objectif de la tâche</label>
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="contexte_tibco" checked> Contexte TIBCO</label>  
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="contexte_commercial" checked> Contexte commercial</label>
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="actu_client" checked> Actualité de l’entreprise</label>
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="actu_secteur" checked> Actualité du secteur</label>
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="offres" checked> Offres TIBCO</label>
+
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="structure_intro" checked> Intro structure</label>
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="structure_resume" checked> Résumé entreprise & actualité</label>
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="structure_objectif_rdv" checked> Objectif du RDV</label>
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="structure_problematique" checked> Problématiques & attentes</label>
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="structure_offres" checked> Réponse Tibco (C-A-B)</label>
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="structure_questions" checked> Questions à poser</label>
+            <label class="itemPersonalisation"><input type="checkbox" name="blocks" value="structure_next_steps" checked> Prochaines étapes</label>
+          </div>
+        </div>
 
       <!-- Colonne 3 : destinataires + boutons -->
       
@@ -288,6 +162,15 @@
         dropdown.classList.remove("open");
       }
     });
+
+        function togglePrompt(radio) {
+      const customPrompt = document.getElementById("custom-prompt");
+      if (radio.value === "Yes") {
+        customPrompt.style.display = "grid";
+      } else {
+        customPrompt.style.display = "none";
+      }
+    }
   </script>
 </body>
 </html>

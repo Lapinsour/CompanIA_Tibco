@@ -1,5 +1,6 @@
 def prompt_blocks(entreprise_nom, collab_nom, liste_services, contexte, secteur, actu_client, news_secteur):
     return {
+        # --- Blocs fixes (toujours inclus) ---
         "objectif": f"""
 🎯 Objectif de la tâche
 Génère un brief commercial clair et structuré pour préparer un rendez-vous entre un commercial TIBCO et un interlocuteur de {entreprise_nom}. 
@@ -31,24 +32,6 @@ Voici les services proposés par Tibco qui ont été identifiés comme pouvant i
 Voici le contexte de cet entretien : {contexte}
 """,
 
-        "actu_client": f"""
-📰 Actualité de {entreprise_nom} :
-{actu_client}
-""",
-
-        "actu_secteur": f"""
-📰 Actualité du secteur de {entreprise_nom}, le {secteur} :  
-{news_secteur}
-""",
-
-        "offres": f"""
-📦 Offres TIBCO à intégrer
-Tu dois intégrer dans le brief des exemples concrets et détaillés à partir des descriptions suivantes (elles sont divisées par thème) :
-
-{liste_services}
-""",
-
-        # --- Structure éclatée en plusieurs blocs ---
         "structure_intro": """
 📋 Structure attendue de la réponse
 """,
@@ -63,27 +46,36 @@ Résumé centré sur la France. Focalise sur les enjeux liés aux métiers TIBCO
 Abstract des objectifs du commercial TIBCO.
 """,
 
-        "structure_problematique": """
+        # --- Blocs optionnels (activables via formulaire) ---
+        "actualite": f"""
+📰 Actualité de {entreprise_nom} :
+{actu_client}
+
+📰 Actualité du secteur de {entreprise_nom}, le {secteur} :  
+{news_secteur}
+""",
+
+        "problematique": """
 🎯 Problématiques, objectifs et attentes du client (≥ 1000 signes)  
 Déduis-les à partir de l’appel d’offres, des enjeux sectoriels et de leurs priorités. 
 Identifie les enjeux concrets (cybersécurité, complexité du sourcing, modernisation, etc.).
 """,
 
-        "structure_offres": """
+        "reponse_tibco": f"""
 🛡️ Que propose Tibco face à ces problématiques ? (≥ 3000 signes)  
 Mets en parallèle les services TIBCO et les besoins/problèmes identifiés.  
-Présente chaque offre TIBCO pertinente grâce au schéma Caractéristique - Avantage - Bénéfice :  
-- Caractéristique : Ce qu’est le produit ou service (aspect technique, fonction).  
-- Avantage : Ce que fait cette caractéristique (l’utilité concrète).  
-- Bénéfice : Ce que cela apporte au client (ce qu’il y gagne, émotionnellement ou en résultats).
+Présente chaque offre TIBCO pertinente grâce au schéma Caractéristique - Avantage - Bénéfice.  
+
+📦 Offres TIBCO à intégrer :  
+{liste_services}
 """,
 
-        "structure_questions": """
+        "questions": """
 🕵️ Questions à poser durant le rendez-vous (500 signes)  
 En prenant bien en compte l'actualité de l'entreprise et de son secteur, et enfin les services de TIBCO, propose une liste de questions ouvertes et pertinentes.
 """,
 
-        "structure_next_steps": """
+        "next_steps": """
 🗓️ Prochaines étapes / plan d’action (≥ 1000 signes)  
 Synthèse, proposition de 2e RDV, envoi doc, aide au CCTP.
 """
@@ -91,4 +83,20 @@ Synthèse, proposition de 2e RDV, envoi doc, aide au CCTP.
 
 def prompt_custom(entreprise_nom, collab_nom, liste_services, contexte, secteur, actu_client, news_secteur, selected_blocks):
     blocks = prompt_blocks(entreprise_nom, collab_nom, liste_services, contexte, secteur, actu_client, news_secteur)
-    return "\n".join([blocks[key] for key in selected_blocks if key in blocks])
+
+    # Blocs fixes toujours inclus
+    fixed_blocks = ["objectif", "contexte_tibco", "contexte_commercial", "structure_intro", "structure_resume", "structure_objectif_rdv"]
+
+    # Mapping des choix utilisateur → vrais blocs
+    optional_mapping = {
+        "actualite": "actualite",
+        "problematique": "problematique",
+        "reponse_tibco": "reponse_tibco",
+        "questions": "questions",
+        "next_steps": "next_steps"
+    }
+
+    # Construire la liste finale
+    final_keys = fixed_blocks + [optional_mapping[key] for key in selected_blocks if key in optional_mapping]
+
+    return "\n".join([blocks[key] for key in final_keys])

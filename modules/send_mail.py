@@ -41,8 +41,7 @@ def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, dest
         <p>{resume_inputs}</p>
         <p>Vous voulez vous connecter avec votre interlocuteur.ice ? 
             <a href="{linkedin_url}">Cliquez ici pour accéder à sa page LinkedIn !</a>
-        </p>        
-        <p>LS = {liste_services}</p>
+        </p>      
         <p>{reponse_relation_sql}</p>
         {wikipedia_block}
         {response_text_html}

@@ -1,4 +1,4 @@
-def prompt_generator_func(entreprise_nom, collab_nom, liste_services, centre_interet_inputs, contexte, secteur, actu_client, news_secteur, services_tibco, collab_fonction, autre) :
+def prompt_generator_func(entreprise_nom, collab_nom, liste_services, contexte, secteur, actu_client, news_secteur) :
     prompt = f"""
     🎯 Objectif de la tâche
     Génère un brief commercial clair et structuré pour préparer un rendez-vous entre un commercial TIBCO et un interlocuteur de {entreprise_nom}. Attention, {entreprise_nom} peut être une collectivité territoriale ou une entreprise, mais je la désignerai dans ce prompt comme une "entreprise" pour faciliter la compréhension. Le brief doit inclure une analyse de l’actualité de l’entreprise cliente, une synthèse de ses enjeux, une présentation des offres pertinentes de TIBCO et un plan d’action pour la suite des échanges.
@@ -19,7 +19,7 @@ def prompt_generator_func(entreprise_nom, collab_nom, liste_services, centre_int
     Elle emploie 1700 collaborateurs sur 113 points de présence en France. En 2023, 50% de son chiffre d’affaires (150 M€) provenait d’activités écoresponsables.
 
     👤 Contexte commercial
-    Le commercial est en rendez-vous avec {collab_nom}, qui occupe la fonction de {collab_fonction} dans l'entreprise {entreprise_nom}.
+    Le commercial est en rendez-vous avec {collab_nom}, qui travaille dans l'entreprise {entreprise_nom}.
 
     Voici les services proposés par Tibco qui ont été identifiés comme pouvant intéresser l'entreprise {entreprise_nom} : {liste_services}.
     
@@ -58,10 +58,7 @@ def prompt_generator_func(entreprise_nom, collab_nom, liste_services, centre_int
 
 
     🕵️ Questions à poser durant le rendez-vous (500 signes)
-    En prenant bien en compte la fonction de l'interlocuteur, {collab_fonction}, mais également l'actualité de l'entreprise et de son secteur, et enfin les services de tibco, propose une liste de questions ouvertes et pertinentes. 
-    
-    ❓ Autre question (1000 signes) : {autre}
-    Réponds à la question : {autre} en prenant en compte toutes les informations à ta disposition, l'actualité de l'entreprise et de son secteur, et enfin les services de tibco.
+    En prenant bien en compte l'actualité de l'entreprise et de son secteur, et  les services de tibco, propose une liste de questions ouvertes et pertinentes.     
 
     🗓️ Prochaines étapes / plan d’action (≥ 1000 signes)
     Synthèse, proposition de 2e RDV, envoi doc, aide au CCTP.

@@ -30,29 +30,24 @@ Le commercial est en rendez-vous avec {collab_nom}, qui travaille pour l'entrepr
 Voici les services proposés par Tibco qui ont été identifiés comme pouvant intéresser l'entreprise {entreprise_nom} : {liste_services}.
 
 Voici le contexte de cet entretien : {contexte}
-""",
+IMPORTANT : Ton brief doit uniquement contenir le ou les blocs suivants : 
+""",      
 
-        "structure_intro": """
-📋 Structure attendue de la réponse
-""",
-
-        "structure_resume": """
-🧩 Résumé de l'entreprise cliente et son actualité (≥ 2000 signes)  
-Résumé centré sur la France. Focalise sur les enjeux liés aux métiers TIBCO.
-""",
-
-        "structure_objectif_rdv": """
-✍️ Objectif du rendez-vous (≥ 1000 signes)  
-Abstract des objectifs du commercial TIBCO.
-""",
+       
 
         # --- Blocs optionnels (activables via formulaire) ---
         "actualite": f"""
-📰 Actualité de {entreprise_nom} :
+🧩 Résumé de l'entreprise cliente et son actualité (≥ 2000 signes)  
+Résumé centré sur la France. Focalise sur les enjeux liés aux métiers TIBCO.
+Tes sources sont l'actualité de l'entreprise :
 {actu_client}
-
-📰 Actualité du secteur de {entreprise_nom}, le {secteur} :  
+Et l'actualité du secteur de l'entreprise :  
 {news_secteur}
+""",
+
+        "objectif_rdv": """
+✍️ Objectif du rendez-vous (≥ 1000 signes)  
+Abstract des objectifs du commercial TIBCO.
 """,
 
         "problematique": """
@@ -85,7 +80,7 @@ def prompt_custom(entreprise_nom, collab_nom, liste_services, contexte, secteur,
     blocks = prompt_blocks(entreprise_nom, collab_nom, liste_services, contexte, secteur, actu_client, news_secteur)
 
     # Blocs fixes toujours inclus
-    fixed_blocks = ["objectif", "contexte_tibco", "contexte_commercial", "structure_intro", "structure_resume", "structure_objectif_rdv"]
+    fixed_blocks = ["objectif", "contexte_tibco", "contexte_commercial"]
 
     # Mapping des choix utilisateur → vrais blocs
     optional_mapping = {
@@ -93,7 +88,8 @@ def prompt_custom(entreprise_nom, collab_nom, liste_services, contexte, secteur,
         "problematique": "problematique",
         "reponse_tibco": "reponse_tibco",
         "questions": "questions",
-        "next_steps": "next_steps"
+        "next_steps": "next_steps",
+        "objectif_rdv":"objectif_rdv"
     }
 
     # Construire la liste finale

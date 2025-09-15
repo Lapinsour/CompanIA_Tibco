@@ -132,3 +132,24 @@
 2025-09-15 12:35:39,586 [INFO] article wikipédia trouvé
 2025-09-15 12:39:49,950 [INFO] Ok, rapport envoyé vers HA-DWH.
 2025-09-15 12:39:50,922 [INFO] Script lancé en arrière-plan avec succès
+2025-09-15 12:50:28,534 [ERROR] Erreur lors de la récupération des clients
+2025-09-15 12:53:37,811 [INFO] article wikipédia trouvé
+2025-09-15 12:54:04,806 [ERROR] Erreur lors de la récupération des clients
+2025-09-15 12:55:46,526 [INFO] Ok, rapport envoyé vers HA-DWH.
+2025-09-15 12:55:47,563 [INFO] Script lancé en arrière-plan avec succès
+2025-09-15 13:04:34,974 [ERROR] Erreur lors de la récupération des clients
+2025-09-15 13:07:34,827 [INFO] article wikipédia trouvé
+2025-09-15 13:09:04,072 [INFO] Script lancé en arrière-plan avec succès
+2025-09-15 13:13:24,708 [INFO] article wikipédia trouvé
+2025-09-15 13:16:50,901 [INFO] Ok, rapport envoyé vers HA-DWH.
+2025-09-15 13:16:52,361 [INFO] Script lancé en arrière-plan avec succès
+2025-09-15 13:28:33,742 [ERROR] Erreur lors de la récupération des clients
+2025-09-15 13:30:02,337 [INFO] article wikipédia trouvé
+2025-09-15 13:33:13,923 [INFO] Ok, rapport envoyé vers HA-DWH.
+2025-09-15 13:33:15,435 [INFO] Script lancé en arrière-plan avec succès
+2025-09-15 13:45:14,958 [INFO] article wikipédia trouvé
+2025-09-15 13:48:11,574 [INFO] Ok, rapport envoyé vers HA-DWH.
+2025-09-15 13:50:46,153 [INFO] article wikipédia trouvé
+2025-09-15 13:53:16,006 [INFO] Ok, rapport envoyé vers HA-DWH.
+2025-09-15 14:12:44,260 [INFO] article wikipédia trouvé
+2025-09-15 14:16:48,037 [INFO] Ok, rapport envoyé vers HA-DWH.

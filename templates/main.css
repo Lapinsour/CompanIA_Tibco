@@ -165,3 +165,19 @@
     background-position: 0% 50%;
   }
 }
+
+            .star-rating {
+                direction: rtl;
+                display: inline-block;
+                unicode-bidi: bidi-override;
+                font-size: 2em;
+                cursor: pointer;
+            }
+            .star {
+                color: lightgray;
+            }
+            .star.selected,
+            .star:hover,
+            .star:hover ~ .star {
+                color: gold;
+            } 

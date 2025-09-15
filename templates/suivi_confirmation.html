@@ -3,57 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Confirmation</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            background: #1e1e1e;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-            width: 420px;
-            color: #f0f0f0;
-            text-align: center;
-        }
-
-        h2 {
-            color: #00bfff;
-            margin-bottom: 30px;
-        }
-
-        form {
-            margin-top: 20px;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #00bfff;
-            border: none;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background: #009acd;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="stylesheet" href="main.css">
 </head>
-<body>
-    <div class="container">
-        <h2>✅ Formulaire de suivi envoyé avec succès !</h2>
+<body class="bg-gradient-to-br from-slate-900 to-black min-h-screen p-4 text-white flex flex-row md:items-center justify-center">
+    <div class="container mx-auto max-w-xl flex flex-col gap-4 bg-white/5 rounded-xl p-10 py-16 ">
+        <h2 class="text-center text-xl font-bold pb-4" >✅ Formulaire de suivi envoyé avec succès !</h2>
 
         <form action="{{ url_for('index') }}">
             <button type="submit">⬅️ Retour au formulaire principal</button>

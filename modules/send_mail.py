@@ -11,7 +11,7 @@ from modules.rag_entreprises_proches import rag_entreprises_proches
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
-def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, destinataires, linkedin_url, reponse_relation_sql, wikipedia_text, resume_inputs, liste_services, code_postal):
+def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, destinataires, linkedin_url, reponse_relation_sql, wikipedia_text, resume_inputs, code_postal):
     
     phrase_proche, csv_content_proche = rag_entreprises_proches(code_postal)
     # === Helper : conversion Markdown-like vers HTML

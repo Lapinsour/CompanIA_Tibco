@@ -106,13 +106,13 @@ def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, dest
             subtype='csv',
             filename='export_affaires.csv'
         )
-    if csv_content_proche.strip():  # Vérifie que ce n’est pas vide
-    msg.add_attachment(
-        csv_content.encode('utf-8'),  # encodage correct
-        maintype='text',
-        subtype='csv',
-        filename='affaires_entreprises_proches.csv'
-    )
+    if csv_content_proche.strip():  
+        msg.add_attachment(
+            csv_content_proche.encode('utf-8'), 
+            maintype='text',
+            subtype='csv',
+            filename='affaires_entreprises_proches.csv'
+        )
     # === Pièce jointe audio
     with open(audio_file, 'rb') as f:
         msg.add_attachment(

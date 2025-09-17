@@ -111,7 +111,7 @@ def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, dest
         csv_content.encode('utf-8'),  # encodage correct
         maintype='text',
         subtype='csv',
-        filename='export_affaires.csv'
+        filename='affaires_entreprises_proches.csv'
     )
     # === Pièce jointe audio
     with open(audio_file, 'rb') as f:

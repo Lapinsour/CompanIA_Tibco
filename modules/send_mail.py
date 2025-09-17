@@ -5,13 +5,15 @@ from gtts import gTTS
 from bs4 import BeautifulSoup
 from openai import OpenAI
 import os 
+from modules.rag_entreprises_proches import rag_entreprises_proches
 
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, destinataires, linkedin_url, reponse_relation_sql, wikipedia_text, resume_inputs, liste_services):
-    
 
+def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, destinataires, linkedin_url, reponse_relation_sql, wikipedia_text, resume_inputs, liste_services, code_postal):
+    
+    phrase_proche, csv_content_proche = rag_entreprises_proches(code_postal)
     # === Helper : conversion Markdown-like vers HTML
     def markdown_to_html(text):
         text = re.sub(r'(?m)^### (.+)', r'<h3>\1</h3>', text)
@@ -43,6 +45,7 @@ def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, dest
             <a href="{linkedin_url}">Cliquez ici pour accéder à sa page LinkedIn !</a>
         </p>      
         <p>{reponse_relation_sql}</p>
+        <p>{phrase_proche}</p>
         {wikipedia_block}
         {response_text_html}
         <p>Vous trouverez en pièce jointe la retranscription audio de ce rapport.</p>
@@ -103,7 +106,13 @@ def send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, dest
             subtype='csv',
             filename='export_affaires.csv'
         )
-
+    if csv_content_proche.strip():  # Vérifie que ce n’est pas vide
+    msg.add_attachment(
+        csv_content.encode('utf-8'),  # encodage correct
+        maintype='text',
+        subtype='csv',
+        filename='export_affaires.csv'
+    )
     # === Pièce jointe audio
     with open(audio_file, 'rb') as f:
         msg.add_attachment(

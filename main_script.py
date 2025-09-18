@@ -307,7 +307,7 @@ def Query_GPT(entreprise_nom, OPENAI_API_KEY,PINECONE_INDEX_NAME):
         # Concatène les deux parties
         return random_part + timestamp
 
-ID_rapport = getCode()
+    ID_rapport = getCode()
 
     #Envoi du mail      
     send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, destinataires, linkedin_url, reponse_relation_sql, wikipedia_text, resume_inputs, code_postal)

@@ -10,13 +10,13 @@
     <div class="container mx-auto max-w-xl flex flex-col gap-4 bg-white/5 rounded-xl p-10 py-16 ">
         <h2 class="text-center text-xl font-bold pb-4" >✅ Formulaire de suivi envoyé avec succès !</h2>
 
-        <form action="{{ url_for('index') }}">
-            <button type="submit">⬅️ Retour au formulaire principal</button>
-        </form>
+        <a href="{{ url_for('index') }}" class="inline-block">
+            ⬅️ Retour au formulaire principal
+        </a>
 
-        <form action="{{ url_for('suivi_feedback') }}">
-            <button type="submit">🔄 Remplir un autre formulaire de suivi</button>
-        </form>
+        <a href="{{ url_for('suivi_feedback') }}" class="inline-block">
+            🔄 Remplir un autre formulaire de suivi
+        </a>
     </div>
 </body>
 </html>

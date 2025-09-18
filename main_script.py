@@ -298,13 +298,16 @@ def Query_GPT(entreprise_nom, OPENAI_API_KEY,PINECONE_INDEX_NAME):
     response_text = chat_gpt_final(prompt)
     
 
-    # Création de l'ID du rapport
-    # IMPORTANT : pour le moment, aucune garantie qu'un rapport n'aie pas le même ident qu'un autre rapport.
-    # Il faudrait récupérer les ID_rapport existant dans la table RAPPORTS_COMPANIA de la BDD COMPANIA sur HA-DWH, 
-    # vérifier si l'ID_RAPPORT généré existe déjà, et si c'est le cas en générer un autre.
-    def getCode(length = 15, char = string.ascii_uppercase + string.digits + string.ascii_lowercase):
-      return ''.join(random.choice( char) for x in range(length))
-    ID_rapport = getCode()
+    # Création de l'ID du rapport   
+    def getCode(length=5, char=string.ascii_uppercase + string.digits + string.ascii_lowercase):
+        # Génère la partie aléatoire
+        random_part = ''.join(random.choice(char) for _ in range(length))
+        # Génère l'horodatage au format AAAAMMJJhhmmss
+        timestamp = dt.now().strftime("%Y%m%d%H%M%S")
+        # Concatène les deux parties
+        return random_part + timestamp
+
+ID_rapport = getCode()
 
     #Envoi du mail      
     send_mail_func(entreprise_nom, relation_sql, response_text, ID_rapport, destinataires, linkedin_url, reponse_relation_sql, wikipedia_text, resume_inputs, code_postal)

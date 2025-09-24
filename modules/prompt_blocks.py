@@ -45,25 +45,12 @@ Et l'actualité du secteur de l'entreprise :
 {news_secteur}
 """,
 
-        "objectif_rdv": """
-✍️ Objectif du rendez-vous (≥ 1000 signes)  
-Abstract des objectifs du commercial TIBCO.
-""",
 
         "problematique": """
 🎯 Problématiques, objectifs et attentes du client (≥ 1000 signes)  
 Déduis-les à partir de l’appel d’offres, des enjeux sectoriels et de leurs priorités. 
 Identifie les enjeux concrets (cybersécurité, complexité du sourcing, modernisation, etc.).
-""",
-
-        "reponse_tibco": f"""
-🛡️ Que propose Tibco face à ces problématiques ? (≥ 3000 signes)  
-Mets en parallèle les services TIBCO et les besoins/problèmes identifiés.  
-Présente chaque offre TIBCO pertinente grâce au schéma Caractéristique - Avantage - Bénéfice.  
-
-📦 Offres TIBCO à intégrer :  
-{liste_services}
-""",
+""",      
 
         "questions": """
 🕵️ Questions à poser durant le rendez-vous (500 signes)  
@@ -72,7 +59,7 @@ En prenant bien en compte l'actualité de l'entreprise et de son secteur, et enf
 
         "next_steps": """
 🗓️ Prochaines étapes / plan d’action (≥ 1000 signes)  
-Synthèse, proposition de 2e RDV, envoi doc, aide au CCTP.
+Proposition de services ou offres Tibco pouvant intéresser l'entreprise démarchée, Synthèse, proposition de 2e RDV, envoi doc, aide au CCTP.
 """
     }
 

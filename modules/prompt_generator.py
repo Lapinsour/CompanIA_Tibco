@@ -41,27 +41,16 @@ def prompt_generator_func(entreprise_nom, collab_nom, liste_services, contexte, 
 
     📋 Structure attendue de la réponse
     🧩 Résumé de l'entreprise cliente et son actualité (≥ 2000 signes)
-    Résumé centré sur la France. Focalise sur les enjeux liés aux métiers TIBCO.
-
-    ✍️ Objectif du rendez-vous (≥ 1000 signes)
-    Abstract des objectifs du commercial TIBCO.
+    Résumé centré sur la France. Focalise sur les enjeux liés aux métiers TIBCO.    
 
     🎯 Problématiques, objectifs et attentes du client (≥ 1000 signes)
     Déduis-les à partir de l’appel d’offres, des enjeux sectoriels et de leurs priorités.Identifie les enjeux concrets (cybersécurité, complexité du sourcing, modernisation, etc.)
-
-    🛡️ Réponses TIBCO aux problématiques (≥ 3000 signes)
-    Mets en parallèle les services TIBCO et les besoins/problèmes identifiés.
-    Présente chaque offre TIBCO pertinente grâce au schéma Caractéristique - Avantage - Bénéfice. N'hésite pas à détailler / donner des exemples tirés de la liste de services Tibco.
-    Caractéristique : Ce qu’est le produit ou service (aspect technique, fonction).
-    Avantage : Ce que fait cette caractéristique (l’utilité concrète).
-    Bénéfice : Ce que cela apporte au client (ce qu’il y gagne, émotionnellement ou en résultats).
-
-
+   
     🕵️ Questions à poser durant le rendez-vous (500 signes)
     En prenant bien en compte l'actualité de l'entreprise et de son secteur, et  les services de tibco, propose une liste de questions ouvertes et pertinentes.     
 
     🗓️ Prochaines étapes / plan d’action (≥ 1000 signes)
-    Synthèse, proposition de 2e RDV, envoi doc, aide au CCTP.
+    Sélections de services et offres Tibco pouvant être proposés à l'entreprise démarchée, Synthèse, proposition de 2e RDV, envoi doc, aide au CCTP.
     """
 
     return prompt

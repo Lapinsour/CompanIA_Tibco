@@ -26,7 +26,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
         <label>Nom de l'entreprise</label>
-        <input type="text" name="entreprise_nom" list="entreprise_list" placeholder="Entreprise X"/>
+        <input type="text" name="entreprise_nom" list="entreprise_list" placeholder="Entreprise X" required/>
         <datalist id="entreprise_list">
           {% for client in clients %}
             <option value="{{ client }}">
@@ -118,7 +118,7 @@
       
         <div>
           <label>Destinataire(s) du rapport CompanIA</label>
-          <input type="text" name="destinataire" placeholder="ex : tswift@tibco.fr ; mj@gmail.com"/>
+          <input type="text" name="destinataire" placeholder="ex : tswift@tibco.fr ; mj@gmail.com" required/>
         </div>
 
         <div class="flex flex-col-reverse md:flex-row items-start gap-8 pt-8">

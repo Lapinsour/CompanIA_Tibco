@@ -10,18 +10,18 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 
-def résumé(texte_article):
+def résumé(texte_article, entreprise_nom):
     # Tronquage si le texte est trop long (garde les 10 000 premiers caractères)
     texte_article = texte_article[:10000] + "\n[Texte tronqué]" if len(texte_article) > 10000 else texte_article
 
     messages = [
         {
             "role": "system",
-            "content": "Tu es un assistant professionnel et pédagogue. Résume en 1500 signes maximum."
+            "content": "Tu es un assistant professionnel et pédagogue."
         },
         {
             "role": "user",
-            "content": f"Voici un article Wikipédia à résumer :\n\n{texte_article}"
+            "content": f"Voici un article Wikipédia. S'il est bien à propos de l'entreprise {entreprise_nom}, résume-le en 1000 signes maximum. Sinon, renvoie EXACTEMENT la phrase 'Voici votre brief !'. Voici l'article Wikipédia :\n\n{texte_article}"
         }
     ]
 
@@ -29,11 +29,16 @@ def résumé(texte_article):
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=messages,
-            temperature=1
+            temperature=0  
         )
-        return response.choices[0].message.content.strip()
+        # Vérifie que la réponse est bien formée
+        output = response.choices[0].message.content.strip()
+        if not output:
+            logger.warning("Réponse vide wikipédia.")
+            return None
+        return output
     except Exception as e:
-        print("❌ Erreur lors de la génération du résumé :", e)
+        logger.error(f"Erreur lors de la génération du résumé : {e}")
         return None
 
 
@@ -102,7 +107,7 @@ def wikipedia_resume(entreprise_nom):
     if texte_article:
         print("article wikipédia trouvé")
         logger.info("article wikipédia trouvé")
-        return résumé(texte_article)
+        return résumé(texte_article, entreprise_nom)
     else:
         print("Aucun texte récupéré ou problème d'article Wikipédia.")
         logger.info("Aucun texte récupéré ou problème d'article Wikipédia.")

@@ -1,16 +1,15 @@
 #COMPANIA
 CompanIA est une application qui : 
 - génère un prompt à partir des entrées d'un formulaire et enrichi par du RAG basé : 
-        - sur des informations sur les offres de services Tibco stockées dans une BDD vectorielle Tibco
-        - sur les actualités de l'entreprise qui fait l'objet de l'entretien et de son secteur récupérées via webscraping et l'API NewsAPI, 
-- requête ce prompt à l'api OpenAI afin de générer un brief de préparation d'entretien commercial, 
+        - sur des informations sur les offres de services Tibco stockées dans une BDD vectorielle Tibco ;
+        - sur des informations tirées des bases de données de Tibco, stockées en SQL ;
+        - sur les actualités de l'entreprise qui fait l'objet de l'entretien et de son secteur récupérées via webscraping et l'API NewsAPI ;
+- Note : ces différents éléments sont envoyés à ChatGPT 4o afin de les retravailler avant de les ajouter au prompt final ;
+- requête ce prompt final à l'api OpenAI afin de générer un brief de préparation d'entretien commercial, 
 - puis envoie la réponse du LLM ainsi que des informations récupérées sur les BDD Tibco sous forme de mail au(x) destinataire(s) sélectionné(s), 
 - en ajoutant en pièce jointe un fichier résumant les contrats dont dispose Tibco avec l'entreprise qui fait l'objet de l'entretien ainsi qu'une version text-to-speech du brief.
 
-CompanIA est destinée à la cinquantaine de commerciaux Tibco. L'accès au formulaire leur est conférée par la SI, via le groupe de sécurité Azure des commerciaux. 
-
-Elle est déployée sur srv-scripts-to. 
-
+CompanIA est destinée à la cinquantaine de commerciaux Tibco.
 
 Version: 0.2 (25-06-2025) 
 

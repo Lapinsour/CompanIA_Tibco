@@ -8,7 +8,7 @@ CompanIA est une application qui :
 - en ajoutant en pièce jointe un fichier résumant les contrats dont dispose Tibco avec l'entreprise qui fait l'objet de l'entretien ainsi qu'une version text-to-speech du brief.
 
 CompanIA est destinée à la cinquantaine de commerciaux Tibco. L'accès au formulaire leur est conférée par la SI, via le groupe de sécurité Azure des commerciaux. 
-Le schéma de la V1 de l'application est accessible au lien suivant : https://tibcodf.atlassian.net/wiki/spaces/R2D/pages/962166785/CompanIA
+
 Elle est déployée sur srv-scripts-to. 
 
 
@@ -52,4 +52,4 @@ Dernière mise-à-jour le : 25-06-2025.
 ├── 📄 Run-CompanIA.bat                
 └── 📄 README.md
 
--- NOTE : actualisation_actu_pinecone_script.py ne fait pas directement partie de l'application. Il est exécuté chaque semaine sur srv-scripts-to. Il purge la BDD vectorielle Pinecone des vieilles actus des entreprises et rafraîchit ces actualités en lançant un webscraping pour chaque entreprise présente dans la BDD Pinecone (celles qui ont déjà fait l'objet de rapports.)
+-- NOTE : actualisation_actu_pinecone_script.py ne fait pas directement partie de l'application. Il est exécuté chaque semaine. Il purge la BDD vectorielle Pinecone des vieilles actus des entreprises et rafraîchit ces actualités en lançant un webscraping pour chaque entreprise présente dans la BDD Pinecone (celles qui ont déjà fait l'objet de rapports.)

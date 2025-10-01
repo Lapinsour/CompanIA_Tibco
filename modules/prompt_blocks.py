@@ -38,6 +38,7 @@ IMPORTANT : Ton brief doit uniquement contenir le ou les blocs suivants :
         # --- Blocs optionnels (activables via formulaire) ---
         "actualite": f"""
 🧩 Résumé de l'entreprise cliente et son actualité (≥ 2000 signes)  
+Ce résumé doit être un texte en un ou deux paragraphes. 
 Résumé centré sur la France. Focalise sur les enjeux liés aux métiers TIBCO.
 Tes sources sont l'actualité de l'entreprise :
 {actu_client}
@@ -59,7 +60,7 @@ En prenant bien en compte l'actualité de l'entreprise et de son secteur, et enf
 
         "next_steps": """
 🗓️ Prochaines étapes / plan d’action (≥ 1000 signes)  
-Proposition de services ou offres Tibco pouvant intéresser l'entreprise démarchée, Synthèse, proposition de 2e RDV, envoi doc, aide au CCTP.
+Proposition de services ou offres Tibco pouvant intéresser l'entreprise démarchée (en une ou deux lignes, pas plus), Synthèse, proposition de 2e RDV, envoi doc, aide au CCTP.
 """
     }
 

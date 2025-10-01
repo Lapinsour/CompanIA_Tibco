@@ -41,6 +41,7 @@ def prompt_generator_func(entreprise_nom, collab_nom, liste_services, contexte, 
 
     📋 Structure attendue de la réponse
     🧩 Résumé de l'entreprise cliente et son actualité (≥ 2000 signes)
+    Ce résumé doit être un texte en un ou deux paragraphes. 
     Résumé centré sur la France. Focalise sur les enjeux liés aux métiers TIBCO.    
 
     🎯 Problématiques, objectifs et attentes du client (≥ 1000 signes)
@@ -50,7 +51,7 @@ def prompt_generator_func(entreprise_nom, collab_nom, liste_services, contexte, 
     En prenant bien en compte l'actualité de l'entreprise et de son secteur, et  les services de tibco, propose une liste de questions ouvertes et pertinentes.     
 
     🗓️ Prochaines étapes / plan d’action (≥ 1000 signes)
-    Sélections de services et offres Tibco pouvant être proposés à l'entreprise démarchée, Synthèse, proposition de 2e RDV, envoi doc, aide au CCTP.
+    Sélections de services et offres Tibco pouvant être proposés à l'entreprise démarchée (en une ou deux lignes, pas plus), Synthèse, proposition de 2e RDV, envoi doc, aide au CCTP.
     """
 
     return prompt
